@@ -12,6 +12,396 @@
         }
     ],
     "paths": {
+        "/api/adminHierarchies": {
+            "get": {
+                "tags": [
+                    "adminHierarchies"
+                ],
+                "summary": "Get a list of admin hierarchies",
+                "operationId": "5e0d37177b533709aae5f5ae53f4744a",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "admin_hierarchy_id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "admin_hierarchy_name": {
+                                                        "type": "string",
+                                                        "example": "Human Resource"
+                                                    },
+                                                    "parent_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "created_by": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string",
+                                                        "example": "Mohammed"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string",
+                                                        "example": "Abdalla"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string",
+                                                        "example": "Bakar"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "adminHierarchies"
+                ],
+                "summary": "Store a new admin hierarchy",
+                "operationId": "b0eae3409493ecf9b859bfcdbda5249a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "admin_hierarchy_name": {
+                                        "type": "string"
+                                    },
+                                    "parent_id": {
+                                        "type": "string"
+                                    },
+                                    "upload_excel": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/adminHierarchies/{admin_hierarchy_id}": {
+            "get": {
+                "tags": [
+                    "adminHierarchies"
+                ],
+                "summary": "Get a specific adminHierarchy",
+                "operationId": "3cef9db09497fa2f2169ac7cd6c40b92",
+                "parameters": [
+                    {
+                        "name": "admin_hierarchy_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "admin_hierarchy_id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "admin_hierarchy_name": {
+                                                        "type": "string",
+                                                        "example": "Human Resource"
+                                                    },
+                                                    "parent_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "created_by": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string",
+                                                        "example": "Mohammed"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string",
+                                                        "example": "Abdalla"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string",
+                                                        "example": "Bakar"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "adminHierarchies"
+                ],
+                "summary": "Update a admin hierarchies",
+                "operationId": "92446f3bbf4ed98828da2eba6353294b",
+                "parameters": [
+                    {
+                        "name": "admin_hierarchy_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "admin_hierarchy_name": {
+                                        "type": "string"
+                                    },
+                                    "parent_id": {
+                                        "type": "string"
+                                    },
+                                    "label": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "adminHierarchies"
+                ],
+                "summary": "Delete a admin hierarchy",
+                "operationId": "670e2a685f58d83807c32a6a7dad0372",
+                "parameters": [
+                    {
+                        "name": "admin_hierarchy_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/countries": {
             "get": {
                 "tags": [
@@ -1864,6 +2254,423 @@
                 }
             }
         },
+        "/api/workStations": {
+            "get": {
+                "tags": [
+                    "workStations"
+                ],
+                "summary": "Get a list of work stations",
+                "operationId": "8241425a99760199db216814dde059e0",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "working_station_id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "working_station_name": {
+                                                        "type": "string",
+                                                        "example": "Human Resource"
+                                                    },
+                                                    "location_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "location_name": {
+                                                        "type": "string",
+                                                        "example": "Mpendae"
+                                                    },
+                                                    "admin_hierarchy_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "admin_hierarchy_name": {
+                                                        "type": "string",
+                                                        "example": "Human Resource"
+                                                    },
+                                                    "created_by": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string",
+                                                        "example": "Mohammed"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string",
+                                                        "example": "Abdalla"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string",
+                                                        "example": "Bakar"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "workStations"
+                ],
+                "summary": "Store a new work stations",
+                "operationId": "23acea9e6845220323569ea58e96108c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "working_station_name": {
+                                        "type": "string"
+                                    },
+                                    "location_id": {
+                                        "type": "string"
+                                    },
+                                    "admin_hierarchy_id": {
+                                        "type": "string"
+                                    },
+                                    "upload_excel": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/workStations/{working_station_id}": {
+            "get": {
+                "tags": [
+                    "workStations"
+                ],
+                "summary": "Get a specific work station",
+                "operationId": "8b1ae57a1c7d066caae0108de2411436",
+                "parameters": [
+                    {
+                        "name": "working_station_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "working_station_id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "working_station_name": {
+                                                        "type": "string",
+                                                        "example": "Human Resource"
+                                                    },
+                                                    "location_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "location_name": {
+                                                        "type": "string",
+                                                        "example": "Mpendae"
+                                                    },
+                                                    "admin_hierarchy_id": {
+                                                        "type": "string",
+                                                        "example": "1"
+                                                    },
+                                                    "admin_hierarchy_name": {
+                                                        "type": "string",
+                                                        "example": "Human Resource"
+                                                    },
+                                                    "created_by": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string",
+                                                        "example": "Mohammed"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string",
+                                                        "example": "Abdalla"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string",
+                                                        "example": "Bakar"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "workStations"
+                ],
+                "summary": "Update a work station",
+                "operationId": "4de9344ce116391c693e475d00d58418",
+                "parameters": [
+                    {
+                        "name": "working_station_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "working_station_name": {
+                                        "type": "string"
+                                    },
+                                    "location_id": {
+                                        "type": "string"
+                                    },
+                                    "admin_hierarchy_id": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "workStations"
+                ],
+                "summary": "Delete a work station",
+                "operationId": "75483111698dc554d2e37e236f62afda",
+                "parameters": [
+                    {
+                        "name": "working_station_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/permissions": {
             "get": {
                 "tags": [
@@ -2468,10 +3275,10 @@
                                         "type": "string"
                                     },
                                     "role_id": {
-                                        "type": "string"
+                                        "type": "integer"
                                     },
-                                    "council_id": {
-                                        "type": "string"
+                                    "working_station_id": {
+                                        "type": "integer"
                                     },
                                     "phone_no": {
                                         "type": "string"
@@ -2681,7 +3488,7 @@
                                     "location_id": {
                                         "type": "string"
                                     },
-                                    "council_id": {
+                                    "admin_hierarchy_id": {
                                         "type": "string"
                                     },
                                     "phone_no": {
@@ -2800,6 +3607,10 @@
     },
     "tags": [
         {
+            "name": "adminHierarchies",
+            "description": "adminHierarchies"
+        },
+        {
             "name": "countries",
             "description": "countries"
         },
@@ -2822,6 +3633,10 @@
         {
             "name": "uploadTypes",
             "description": "uploadTypes"
+        },
+        {
+            "name": "workStations",
+            "description": "workStations"
         },
         {
             "name": "permissions",

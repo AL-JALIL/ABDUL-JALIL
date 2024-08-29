@@ -78,7 +78,8 @@ class UsersCotroller extends Controller
                             ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
                             ->join('user_hierarchies', 'user_hierarchies.user_id', '=', 'users.id')
                             ->join('working_stations', 'working_stations.working_station_id', '=', 'user_hierarchies.working_station_id')
-                            ->select('users.id','users.first_name','users.middle_name','users.last_name','users.email','users.phone_no','users.address','users.gender','users.date_of_birth','users.deleted_at','roles.name as role_name','roles.id as role_id','working_stations.working_station_id', 'working_stations.working_station_name','user_hierarchies.user_hierarche_id')
+                            ->join('admin_hierarchies', 'admin_hierarchies.admin_hierarchy_id', '=', 'working_stations.admin_hierarchy_id')
+                            ->select('users.id','users.first_name','users.middle_name','users.last_name','users.email','users.phone_no','users.address','users.gender','users.date_of_birth','users.deleted_at','roles.name as role_name','roles.id as role_id','admin_hierarchies.admin_hierarchy_name','working_stations.working_station_id','working_stations.working_station_name')
                             ->where('model_has_roles.role_id','!=',1)
                             ->get();
 
@@ -105,8 +106,8 @@ class UsersCotroller extends Controller
                             ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
                             ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
                             ->join('user_hierarchies', 'user_hierarchies.user_id', '=', 'users.id')
-                            ->join('working_stations', 'working_stations.working_station_id', '=', 'user_hierarchies.working_station_id')
-                            ->select('users.id','users.first_name','users.middle_name','users.last_name','users.email','users.phone_no','users.address','users.gender','users.date_of_birth','users.deleted_at','roles.name as role_name','roles.id as role_id','working_stations.working_station_id', 'working_stations.working_station_name','user_hierarchies.user_hierarche_id')
+                            ->join('admin_hierarchies', 'admin_hierarchies.admin_hierarchy_id', '=', 'user_hierarchies.admin_hierarchy_id')
+                            ->select('users.id','users.first_name','users.middle_name','users.last_name','users.email','users.phone_no','users.address','users.gender','users.date_of_birth','users.deleted_at','roles.name as role_name','roles.id as role_id','admin_hierarchies.admin_hierarchy_name','user_hierarchies.user_hierarche_id')
                             ->where('model_has_roles.role_id','!=',1)
                             ->where('roles.name','!=','ROLE NATIONAL')
                             ->get();
@@ -155,11 +156,12 @@ class UsersCotroller extends Controller
      *             @OA\Property(property="middle_name", type="string"),
      *             @OA\Property(property="last_name", type="string"),
      *             @OA\Property(property="location_id", type="string"),
-     *             @OA\Property(property="role_id", type="string"),
-     *             @OA\Property(property="council_id", type="string"),
+     *             @OA\Property(property="role_id", type="integer"),
+     *             @OA\Property(property="working_station_id", type="integer"),
      *             @OA\Property(property="phone_no", type="string"),
      *             @OA\Property(property="date_of_birth", type="date"),
      *             @OA\Property(property="email", type="string"),
+     *             @OA\Property(property="address", type="string"),
      *             @OA\Property(property="gender", type="string"),
      *             @OA\Property(property="password", type="string")
      *         )
@@ -189,6 +191,7 @@ class UsersCotroller extends Controller
     {
         $user_id = auth()->user()->id;
         $auto_id = random_int(10000, 99999).time();
+    
         if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Create User'))
         {
             $check_value = DB::select("SELECT u.email FROM users u WHERE u.email = '$request->email'");
@@ -196,6 +199,10 @@ class UsersCotroller extends Controller
             if(sizeof($check_value) == 0)
             {
                 try{
+
+                    $auto_pass = new GeneralController();
+                    $password = $auto_pass->randomPassword();
+
                     $users = User::create([
                         'id' => $auto_id,
                         'first_name' => $request->first_name,
@@ -206,12 +213,12 @@ class UsersCotroller extends Controller
                         'gender' => $request->gender,
                         'date_of_birth' =>$request->date_of_birth,
                         'email' => $request->email,
-                        'password' => Hash::make($auto_id),
+                        'password' => Hash::make($password),
                         'login_status'=> '0'
                     ]);
     
-                    $users->assignRole($request->roleID);
-                    $roleID = $request->roleID;
+                    $users->assignRole($request->role_id);
+                    $roleID = $request->role_id;
 
                     $permissions = DB::table('role_has_permissions')
                                         ->join('permissions', 'permissions.id', '=', 'role_has_permissions.permission_id')
@@ -231,7 +238,7 @@ class UsersCotroller extends Controller
     
                     $successResponse = [
                         'message'=>'User Account Created Successfuly',
-                        'password'=>$auto_id,
+                        'password'=>$password,
                         'email'=>$request->email,
                         'statusCode' => 201
                     ];
@@ -321,8 +328,8 @@ class UsersCotroller extends Controller
                             ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
                             ->join('roles', 'roles.id', '=', 'model_has_roles.role_id')
                             ->join('user_hierarchies', 'user_hierarchies.user_id', '=', 'users.id')
-                            ->join('working_stations', 'working_stations.working_station_id', '=', 'user_hierarchies.working_station_id')
-                            ->select('users.id','users.first_name','users.middle_name','users.last_name','users.email','users.phone_no','users.address','users.gender','users.date_of_birth','users.deleted_at','roles.name as role_name','roles.id as role_id','working_stations.working_station_id', 'working_stations.working_station_name','user_hierarchies.user_hierarche_id')
+                            ->join('admin_hierarchies', 'admin_hierarchies.admin_hierarchy_id', '=', 'user_hierarchies.admin_hierarchy_id')
+                            ->select('users.id','users.first_name','users.middle_name','users.last_name','users.email','users.phone_no','users.address','users.gender','users.date_of_birth','users.deleted_at','roles.name as role_name','roles.id as role_id','admin_hierarchies.admin_hierarchy_name','user_hierarchies.user_hierarche_id')
                             ->where('model_has_roles.role_id','!=',1)
                             ->where('users.id','=',$id)
                             ->get();
@@ -346,7 +353,7 @@ class UsersCotroller extends Controller
         //
     }
 
-/**
+    /**
      * @OA\Put(
      *     path="/api/userAccounts/{id}",
      *     summary="Update a userAccounts",
@@ -365,7 +372,7 @@ class UsersCotroller extends Controller
      *             @OA\Property(property="middle_name", type="string"),
      *             @OA\Property(property="last_name", type="string"),
      *             @OA\Property(property="location_id", type="string"),
-     *             @OA\Property(property="council_id", type="string"),
+     *             @OA\Property(property="admin_hierarchy_id", type="string"),
      *             @OA\Property(property="phone_no", type="string"),
      *             @OA\Property(property="date_of_birth", type="date"),
      *             @OA\Property(property="email", type="string"),
@@ -415,7 +422,7 @@ class UsersCotroller extends Controller
                 // $users->assignRole($request->roleID);
 
                 $UserHierarchies = UserHierarchies::find($user_hierarche_id);
-                $UserHierarchies->working_station_id  = $request->working_station_id;
+                $UserHierarchies->admin_hierarchy_id  = $request->admin_hierarchy_id;
                 $UserHierarchies->user_id = $id;
                 $UserHierarchies->created_by  = $user_id;
                 $UserHierarchies->update();
@@ -443,7 +450,7 @@ class UsersCotroller extends Controller
         }
     }
 
-/**
+    /**
      * @OA\Delete(
      *     path="/api/userAccounts/{id}",
      *     summary="Delete a userAccounts",
