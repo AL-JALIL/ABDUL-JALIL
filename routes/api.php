@@ -45,4 +45,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     
 
     Route::resource('Department', App\Http\Controllers\API\Setup\DepartmentController::class);
+    Route::resource('Department', App\Http\Controllers\API\Setup\DepartmentController::class);
 });
