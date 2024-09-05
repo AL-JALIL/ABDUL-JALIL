@@ -43,6 +43,11 @@ class permission_info extends Seeder
                 'Delete Location',
                 'View Location',
 
+                'Create department',
+                'Update department',
+                'Delete department',
+                'View department',
+
                 'Create Facility Level',
                 'Update Facility Level',
                 'Delete Facility Level',
@@ -73,6 +78,8 @@ class permission_info extends Seeder
                 'Division permission',
                 'Unit permission',
                 'DMO permission'
+
+               
 
 
          ];
