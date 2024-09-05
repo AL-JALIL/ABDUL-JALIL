@@ -17,21 +17,21 @@ class Department extends Model
     *
     * @var string
     */
-    protected $table = 'countries';
+    protected $table = 'departments';
 
     /**
     * The primary key associated with the table.
     *
     * @var string
     */
-    protected $primaryKey = 'country_id';
+    protected $primaryKey = 'department_id';
 
     /**
     * Indicates if the model's ID is not auto-incrementing.
     *
     * @var bool
     */
-    public $incrementing = false;
+    public $incrementing = true;
 
     /**
     * The data type of the auto-incrementing ID.
@@ -46,9 +46,9 @@ class Department extends Model
     * @var array
     */
     protected $fillable = [
-        'country_id',
-        'country_code',
-        'country_name',
+        'department_id',
+        'department_name',
+        'parent_id',
         'created_by'
     ];
 

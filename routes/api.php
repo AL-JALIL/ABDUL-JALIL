@@ -43,4 +43,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('unBlockUploadTypes/{upload_types_id}', [App\Http\Controllers\API\Setup\UnBlockCotroller::class, 'unblock_upload_types'])->name('unBlockUploadTypes');
     Route::get('unBlockUser/{user_id}', [App\Http\Controllers\API\Setup\UnBlockCotroller::class, 'unblock_user'])->name('unBlockUser');
     
+
+    Route::resource('Department', App\Http\Controllers\API\Setup\DepartmentController::class);
 });

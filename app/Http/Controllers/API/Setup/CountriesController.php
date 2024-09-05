@@ -49,7 +49,7 @@ class CountriesController extends Controller
     *                     @OA\Property(property="country_code", type="string", example="ROLE NATIONAL"),
     *                     @OA\Property(property="country_name", type="string", example="Mohammed"),
     *                     @OA\Property(property="created_by", type="integer", example=1),
-    *                     @OA\Property(property="first_name", type="string", example="Mohammed"),
+    *                     @OA\Property(property="first_name", type="string", example="Abdull JAlil"),
     *                     @OA\Property(property="middle_name", type="string", example="Abdalla"),
     *                     @OA\Property(property="last_name", type="string", example="Bakar"),
     *                     @OA\Property(property="created_at", type="string", format="date-time", example="2024-08-28 11:30:25"),

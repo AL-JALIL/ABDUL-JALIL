@@ -454,7 +454,7 @@
                                                     },
                                                     "first_name": {
                                                         "type": "string",
-                                                        "example": "Mohammed"
+                                                        "example": "Abdull JAlil"
                                                     },
                                                     "middle_name": {
                                                         "type": "string",
@@ -541,6 +541,80 @@
                                         },
                                         "statusCode": {
                                             "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/Department": {
+            "get": {
+                "tags": [
+                    "countries"
+                ],
+                "summary": "Get a list of Department",
+                "operationId": "8036f813b1f3e8706c5f9518af3c2f66",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "Department_id": {
+                                                        "type": "integer",
+                                                        "example": 2
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string",
+                                                        "example": "Out Patient OPD"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2024-08-28 11:30:25"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 200
                                         }
                                     },
                                     "type": "object"
@@ -3288,6 +3362,9 @@
                                         "format": "date"
                                     },
                                     "email": {
+                                        "type": "string"
+                                    },
+                                    "address": {
                                         "type": "string"
                                     },
                                     "gender": {
