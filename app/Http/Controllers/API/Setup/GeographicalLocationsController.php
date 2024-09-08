@@ -372,7 +372,7 @@ class GeographicalLocationsController extends Controller
             catch (Exception $e)
             {
                 return response()
-                    ->json(['message' => $e->getMessage(),'statusCode'=> 500]);
+                    ->json(['message' => 'Internal server error','statusCode'=> 500,'error'=>$e->getMessage()]);
             }
         }
         else{

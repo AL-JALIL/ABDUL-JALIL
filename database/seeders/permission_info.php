@@ -26,7 +26,7 @@ class permission_info extends Seeder
             'Report Management',
 
 
-            'User Management',
+            'User Modules',
                 'Create User',
                 'Update User',
                 'Delete User',
@@ -37,16 +37,31 @@ class permission_info extends Seeder
                 'Delete Role',
                 'View Role',
 
-            'Setup Management',
+            'Setup Modules',
                 'Create Location',
                 'Update Location',
                 'Delete Location',
                 'View Location',
 
-                'Create department',
-                'Update department',
-                'Delete department',
-                'View department',
+                'Create Department',
+                'Update Department',
+                'Delete Department',
+                'View Department',
+
+                'Create Asset',
+                'Update Asset',
+                'Delete Asset',
+                'View Asset',
+
+                'Create Condition',
+                'Update Condition',
+                'Delete Condition',
+                'View Condition',
+
+                'Create Asset Department',
+                'Update Asset Department',
+                'Delete Asset Department',
+                'View Asset Department',
 
                 'Create Facility Level',
                 'Update Facility Level',
@@ -74,10 +89,13 @@ class permission_info extends Seeder
                 'View Parent Upload Type',
                 
                 'Zone B Permission',
-                'Department permission',
                 'Division permission',
                 'Unit permission',
-                'DMO permission'
+                'DMO permission',
+
+               
+          
+
 
                
 

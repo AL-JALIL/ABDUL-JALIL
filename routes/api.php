@@ -44,6 +44,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('unBlockUser/{user_id}', [App\Http\Controllers\API\Setup\UnBlockCotroller::class, 'unblock_user'])->name('unBlockUser');
     
 
-    Route::resource('Department', App\Http\Controllers\API\Setup\DepartmentController::class);
-    Route::resource('Department', App\Http\Controllers\API\Setup\DepartmentController::class);
+    Route::resource('Departments', App\Http\Controllers\API\Setup\DepartmentController::class);
+    Route::resource('Assets', App\Http\Controllers\API\Setup\AssetController::class);
+    Route::resource('Conditions', App\Http\Controllers\API\Setup\ConditionController::class);
+    Route::resource('assetDepartments', App\Http\Controllers\API\Setup\AssetDepartmentController::class);
 });

@@ -17,7 +17,7 @@ class UploadTypesController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->middleware('permission:Setup Management|Create Upload Types|Create Upload Types|Update Upload Types|Update Upload Types|Delete Upload Types', ['only' => ['index','create','store','update','destroy']]);
+        $this->middleware('permission:Setup Modules|Create Upload Types|Create Upload Types|Update Upload Types|Update Upload Types|Delete Upload Types', ['only' => ['index','create','store','update','destroy']]);
     }
 
     /**
@@ -63,7 +63,7 @@ class UploadTypesController extends Controller
     */
     public function index()
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Management'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
         {
             $uploadType = DB::table('upload_types')
                                 ->join('users', 'users.id', '=', 'upload_types.created_by')
@@ -253,7 +253,7 @@ class UploadTypesController extends Controller
     */
     public function show(string $upload_type_id)
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Management'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
         {
             $uploadTypes = DB::table('upload_types')
                                 ->select('upload_types.*')

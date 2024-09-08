@@ -16,7 +16,7 @@ class DepartmentController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->middleware('permission:Setup Management|Create department|Create department|Update department|Update department|Delete department', ['only' => ['index','create','store','update','destroy']]);
+        $this->middleware('permission:Setup Modules|Create department|Create department|Update department|Update department|Delete department', ['only' => ['index','create','store','update','destroy']]);
     }
     
      /**
@@ -58,7 +58,7 @@ class DepartmentController extends Controller
     */
     public function index()
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Management'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
         {
             $department =DB::table('departments')->get();
 
@@ -122,7 +122,7 @@ class DepartmentController extends Controller
 // get specific department
     public function show(string $department_id)
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Management'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
         {
             $department = DB::table('departments')
                                 ->select('departments.*')
