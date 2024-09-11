@@ -14,7 +14,7 @@ class AssetController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->middleware('permission:Setup Modules|Create asset|Create asset|Update asset|Update asset|Delete asset', ['only' => ['index','create','store','update','destroy']]);
+        $this->middleware('permission:Setup Modules|Create Asset|Create Asset|Update Asset|Update Asset|Delete Asset|View Asset', ['only' => ['index','create','store','update','destroy']]);
     }
 
     /**
@@ -67,7 +67,7 @@ class AssetController extends Controller
 
     public function index()
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('View Asset'))
         {
             $asset =DB::table('assets')->get();
 
@@ -128,7 +128,7 @@ class AssetController extends Controller
 
     public function store(Request $request)
     {
-    if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Create Identification'))
+    if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Create Asset'))
         {
            
             
@@ -226,7 +226,7 @@ class AssetController extends Controller
     // get specific asset
     public function show(string $asset_id)
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('View Asset'))
         {
             $asset = DB::table('assets')
                                 ->select('assets.*')
@@ -308,7 +308,7 @@ class AssetController extends Controller
     public function update(Request $request, string $asset_id)
     {
        
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Update asset'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Update Asset'))
         {
 
             $check_value = DB::select("SELECT asset_name FROM assets WHERE LOWER(asset_name) = LOWER('$request->asset_name') and asset_id != $asset_id");
@@ -383,7 +383,7 @@ class AssetController extends Controller
 
     public function destroy(string $asset_id)
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Delete Upload Types'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Delete Asset'))
         {
             $delete = Asset::find($asset_id);
             if ($delete != null) {
@@ -401,4 +401,6 @@ class AssetController extends Controller
                 ->json(['message' => 'unAuthenticated','statusCode'=> 401]);
         }
     }
+
+    
 }

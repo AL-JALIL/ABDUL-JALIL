@@ -15,7 +15,7 @@ class ConditionController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->middleware('permission:Setup Modules|Create condition|Create condition|Update condition|Update condition|Delete condition', ['only' => ['index','create','store','update','destroy']]);
+        $this->middleware('permission:Setup Modules|Create Condition|Create Condition|Update Condition|Update Condition|Delete Condition', ['only' => ['index','create','store','update','destroy']]);
     }
 
     /**
@@ -55,7 +55,7 @@ class ConditionController extends Controller
 
     public function index()
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('View Location'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('View Condition'))
         {
             $condition =DB::table('conditions')->get();
 
@@ -124,7 +124,7 @@ class ConditionController extends Controller
     // get specific condition
     public function show(string $condition_id)
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('View Condition'))
         {
             $condition = DB::table('conditions')
                                 ->select('conditions.*')
@@ -187,7 +187,7 @@ class ConditionController extends Controller
 
     public function destroy(string $asset_id)
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Delete Upload Types'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Delete Condition'))
         {
             $delete = Condition::find($asset_id);
             if ($delete != null) {

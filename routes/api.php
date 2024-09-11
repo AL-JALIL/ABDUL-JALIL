@@ -48,4 +48,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('Assets', App\Http\Controllers\API\Setup\AssetController::class);
     Route::resource('Conditions', App\Http\Controllers\API\Setup\ConditionController::class);
     Route::resource('assetDepartments', App\Http\Controllers\API\Setup\AssetDepartmentController::class);
+    Route::resource('transferAssets', App\Http\Controllers\API\Setup\TransferAssetController::class);
+    Route::resource('responsiblePersons', App\Http\Controllers\API\Setup\ResponsiblePersonController::class);
+    Route::resource('Challenges', App\Http\Controllers\API\Setup\ChallengeController::class);
 });

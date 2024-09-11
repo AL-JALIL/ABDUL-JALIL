@@ -58,7 +58,7 @@ class AssetDepartmentController extends Controller
 
     public function index()
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('View Asset Department'))
         {
             $asset_department =DB::table('asset_departments')->get();
 
@@ -122,7 +122,7 @@ class AssetDepartmentController extends Controller
 
     public function store(Request $request)
 {
-    if (auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Create Identification')) {
+    if (auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Create Asset Department')) {
         $user_id = auth()->user()->id;
 
         try {
@@ -239,7 +239,7 @@ class AssetDepartmentController extends Controller
 // get specific asset_department
 public function show(string $asset_department_id)
 {
-    if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
+    if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('View Asset Department'))
     {
         $asset_department = DB::table('asset_departments')
                             ->select('asset_departments.*')
@@ -322,7 +322,7 @@ public function show(string $asset_department_id)
 /// update asset_department
 public function update(Request $request, string $asset_department_id)
 {
-    if (auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Update asset_department')) {
+    if (auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Update Asset Department')) {
         // Check if registration_number already exists, excluding the current record
         $check_value = DB::select(
             "SELECT registration_number FROM asset_departments WHERE LOWER(registration_number) = LOWER(?) AND asset_department_id != ?",
@@ -419,7 +419,7 @@ public function update(Request $request, string $asset_department_id)
 
 public function destroy(string $asset_department_id)
 {
-    if (auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Delete Upload Types')) {
+    if (auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Delete Asset Department')) {
         $delete = AssetDepartment::find($asset_department_id);
 
         if ($delete != null) {
