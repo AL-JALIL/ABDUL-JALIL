@@ -50,5 +50,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('assetDepartments', App\Http\Controllers\API\Setup\AssetDepartmentController::class);
     Route::resource('transferAssets', App\Http\Controllers\API\Setup\TransferAssetController::class);
     Route::resource('responsiblePersons', App\Http\Controllers\API\Setup\ResponsiblePersonController::class);
-    Route::resource('Challenges', App\Http\Controllers\API\Setup\ChallengeController::class);
+    Route::resource('Chalenges', App\Http\Controllers\API\Setup\ChallengeControler::class);
+    Route::resource('ChalengeSolutions', App\Http\Controllers\API\Setup\ChalengeSolutionController::class);
 });

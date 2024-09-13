@@ -29,8 +29,8 @@ class user_info extends Seeder
             'gender' => 'Male', 
             'phone_no' => '0777000001', 
             'date_of_birth' => '1990-10-30', 
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin')
+            'email' => 'info@mohz.go.tz',
+            'password' => bcrypt('admin@123')
         ]);
 
         $role = Role::create(['name' => 'ROLE ADMIN']);

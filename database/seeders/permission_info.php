@@ -58,10 +58,15 @@ class permission_info extends Seeder
                 'Delete Condition',
                 'View Condition',
 
-                'Create Challenge',
-                'Update Challenge',
-                'Delete Challenge',
-                'View Challenge',
+                'Create Chalenge',
+                'Update Chalenge',
+                'Delete Chalenge',
+                'View Chalenge',
+
+                'Create Chalenge Solution',
+                'Update Chalenge Solution',
+                'Delete Chalenge Solution',
+                'View Chalenge Solution',
 
                 'Create Asset Department',
                 'Update Asset Department',
