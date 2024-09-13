@@ -43,4 +43,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('unBlockUploadTypes/{upload_types_id}', [App\Http\Controllers\API\Setup\UnBlockCotroller::class, 'unblock_upload_types'])->name('unBlockUploadTypes');
     Route::get('unBlockUser/{user_id}', [App\Http\Controllers\API\Setup\UnBlockCotroller::class, 'unblock_user'])->name('unBlockUser');
     
+
+    Route::resource('Departments', App\Http\Controllers\API\Setup\DepartmentController::class);
+    Route::resource('Assets', App\Http\Controllers\API\Setup\AssetController::class);
+    Route::resource('Conditions', App\Http\Controllers\API\Setup\ConditionController::class);
+    Route::resource('assetDepartments', App\Http\Controllers\API\Setup\AssetDepartmentController::class);
+    Route::resource('transferAssets', App\Http\Controllers\API\Setup\TransferAssetController::class);
+    Route::resource('responsiblePersons', App\Http\Controllers\API\Setup\ResponsiblePersonController::class);
+    Route::resource('Chalenges', App\Http\Controllers\API\Setup\ChallengeControler::class);
+    Route::resource('ChalengeSolutions', App\Http\Controllers\API\Setup\ChalengeSolutionController::class);
 });

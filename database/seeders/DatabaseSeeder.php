@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             admin_info::class,
             national_role::class,
             batch_year::class,
+            condition_info::class,
         ]);
     }
 }
