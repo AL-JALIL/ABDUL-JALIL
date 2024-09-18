@@ -19,12 +19,12 @@ class GeographicalLocationsController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->middleware('permission:Setup Management|Create Location|Create Location|Update Location|Update Location|Delete Location', ['only' => ['index','create','store','update','destroy']]);
+        $this->middleware('permission:Setup Modules|Create Location|Create Location|Update Location|Update Location|Delete Location', ['only' => ['index','create','store','update','destroy']]);
 
         // $validate_batch_year = new GeneralController();
         // $validate_batch_year->batch_year_configuration();
     }
-    
+
     /**
      * @OA\Get(
      *     path="/api/locations",
@@ -96,7 +96,7 @@ class GeographicalLocationsController extends Controller
      */
     public function create()
     {
-        
+
     }
 
     /**
@@ -177,7 +177,7 @@ class GeographicalLocationsController extends Controller
                     'statusCode'=> 400
                 ];
 
-                return response()->json($respose);       
+                return response()->json($respose);
             }
 
             try{
@@ -349,7 +349,7 @@ class GeographicalLocationsController extends Controller
                 'statusCode'=> 400
             ];
 
-            return response()->json($respose);       
+            return response()->json($respose);
         }
 
         if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Update Location'))

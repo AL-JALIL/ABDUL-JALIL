@@ -17,7 +17,7 @@ class AdminHierarchiesController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->middleware('permission:Setup Management|Create Admin Hierarchies|Create Admin Hierarchies|Update Admin Hierarchies|Update Admin Hierarchies|Delete Admin Hierarchies', ['only' => ['index','create','store','update','destroy']]);
+        $this->middleware('permission:Setup Modules|Create Admin Hierarchies|Update Admin Hierarchies|Delete Admin Hierarchies', ['only' => ['index','store','update','destroy']]);
 
     }
 
@@ -93,7 +93,7 @@ class AdminHierarchiesController extends Controller
     */
     public function index()
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Management'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
         {
             $adminHierarchies = DB::table('admin_hierarchies')
                                 ->join('users', 'users.id', '=', 'admin_hierarchies.created_by')
@@ -123,13 +123,8 @@ class AdminHierarchiesController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+
+
 
     /**
      * @OA\Post(
@@ -289,7 +284,7 @@ class AdminHierarchiesController extends Controller
     */
     public function show(string $admin_hierarchy_id)
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Management'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
         {
             $adminHierarchies = DB::table('admin_hierarchies')
                                 ->select('admin_hierarchies.*')
@@ -318,13 +313,8 @@ class AdminHierarchiesController extends Controller
         }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+  
+
 
     /**
      * @OA\Put(

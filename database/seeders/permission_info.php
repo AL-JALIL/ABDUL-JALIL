@@ -19,7 +19,7 @@ class permission_info extends Seeder
         //  Permission::truncate();
 
         $permissions = [
-            
+
             'View Dashboard',
             'View Permission',
             'System Audit',
@@ -107,25 +107,18 @@ class permission_info extends Seeder
                 'Update Parent Upload Type',
                 'Delete Parent Upload Type',
                 'View Parent Upload Type',
-                
+
                 'Zone B Permission',
                 'Division permission',
                 'Unit permission',
                 'DMO permission',
 
-               
-          
-
-
-               
-
-
          ];
 
          foreach ($permissions as $permission) {
- 
+
             Permission::create(['name' => $permission,'guard_name'=>'web']);
- 
+
          }
     }
 }

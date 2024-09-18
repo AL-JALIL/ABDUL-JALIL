@@ -16,7 +16,7 @@ class ParentUploadsController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->middleware('permission:Setup Management|Create Parent Upload Type|Create Parent Upload Type|Update Parent Upload Type|Update Parent Upload Type|Delete Parent Upload Type', ['only' => ['index','create','store','update','destroy']]);
+        $this->middleware('permission:Setup Modules|Create Parent Upload Type|Create Parent Upload Type|Update Parent Upload Type|Update Parent Upload Type|Delete Parent Upload Type', ['only' => ['index','create','store','update','destroy']]);
     }
 
 /**
@@ -342,7 +342,7 @@ class ParentUploadsController extends Controller
                 'statusCode'=> 400
             ];
 
-            return response()->json($respose);       
+            return response()->json($respose);
         }
 
 
@@ -362,7 +362,7 @@ class ParentUploadsController extends Controller
                 $newParentUploadTypes = $request->parent_upload_types;
 
                 for($x = 0; $x < count($newParentUploadTypes); $x++) {
-                    
+
                     if (in_array($newParentUploadTypes[$x]['upload_type_id'], $existingParentUploadTypes)) {
                         ParentUploadTypes::withTrashed()->where('parent_upload_id', $parent_upload_id)->where('upload_type_id', $newParentUploadTypes[$x]['upload_type_id'])->update(['deleted_at' => null]);
                     } else {
@@ -373,7 +373,7 @@ class ParentUploadsController extends Controller
                             'created_by' => $user_id
                         ]);
                     }
-                    
+
                 }
 
                 $newExistingParentUploadTypes = [];
@@ -383,15 +383,15 @@ class ParentUploadsController extends Controller
                 }
 
                 for($x = 0; $x < count($existingParentUploadTypes); $x++) {
-                    
+
                     if (in_array($existingParentUploadTypes[$x], $newExistingParentUploadTypes)) {
                         //skip
                     } else {
                         ParentUploadTypes::where('parent_upload_id', $parent_upload_id)->where('upload_type_id', $existingParentUploadTypes[$x])->update(['deleted_at' => now()]);
                     }
-                    
+
                 }
-            
+
 
                 $respose =[
                     'message' =>'Parent Upload Type Updated Successfully',

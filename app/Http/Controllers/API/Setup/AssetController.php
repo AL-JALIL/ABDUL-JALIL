@@ -14,7 +14,7 @@ class AssetController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->middleware('permission:Setup Modules|Create Asset|Create Asset|Update Asset|Update Asset|Delete Asset|View Asset', ['only' => ['index','create','store','update','destroy']]);
+        $this->middleware('permission:Setup Modules|Create Asset|Update Asset|Delete Asset', ['only' => ['index','create','store','update','destroy']]);
     }
 
     /**
@@ -130,10 +130,10 @@ class AssetController extends Controller
     {
     if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Create Asset'))
         {
-           
-            
+
+
             $user_id = auth()->user()->id;
-    
+
             $check_value = DB::select("SELECT serial_number FROM assets WHERE LOWER(serial_number) = ?", [strtolower($request->serial_number)]);
 
             if(sizeof($check_value) != 0)
@@ -142,23 +142,23 @@ class AssetController extends Controller
                     'message' =>'Identification  Alraedy Exists',
                     'statusCode'=> 400
                 ];
-    
-                return response()->json($respose);       
+
+                return response()->json($respose);
             }
 
             try{
-                $asset = Asset::create([ 
+                $asset = Asset::create([
                     'asset_name' => $request->asset_name,
                     'serial_number' => $request->serial_number,
                     'code' => $request->code,
                     'created_by' => $user_id
                 ]);
-        
+
                 $respose =[
                     'message' =>'Asset Inserted Successfully',
                     'statusCode'=> 201
                 ];
-        
+
                 return response()->json($respose);
             }
             catch (Exception $e)
@@ -226,14 +226,14 @@ class AssetController extends Controller
     // get specific asset
     public function show(string $asset_id)
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('View Asset'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
         {
             $asset = DB::table('assets')
                                 ->select('assets.*')
                                 ->where('assets.asset_id', '=',$asset_id)
                                 ->get();
 
-            if (sizeof($asset) > 0) 
+            if (sizeof($asset) > 0)
             {
                 $respose =[
                     'data' => $asset,
@@ -246,7 +246,7 @@ class AssetController extends Controller
                 return response()
                 ->json(['message' => 'No asset Found','statusCode'=> 400]);
             }
-                
+
         }
         else{
             return response()
@@ -307,7 +307,7 @@ class AssetController extends Controller
     /// update asset
     public function update(Request $request, string $asset_id)
     {
-       
+
         if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Update Asset'))
         {
 
@@ -319,10 +319,10 @@ class AssetController extends Controller
                     'message' =>'asset Name Alraedy Exists',
                     'statusCode'=> 400
                 ];
-    
-                return response()->json($respose);       
+
+                return response()->json($respose);
             }
-            
+
 
             $user_id = auth()->user()->id;
             try{
@@ -337,18 +337,18 @@ class AssetController extends Controller
                     'message' =>'Asset Updated Successfully',
                     'statusCode'=> 201
                 ];
-                return response()->json($respose); 
+                return response()->json($respose);
             }
             catch (Exception $e)
             {
                 return response()
                     ->json(['message' => $e->getMessage(),'statusCode'=> 401]);
             }
-        }  
+        }
         else{
             return response()
                 ->json(['message' => 'unAuthenticated','statusCode'=> 401]);
-        } 
+        }
     }
 
     /**
@@ -388,12 +388,12 @@ class AssetController extends Controller
             $delete = Asset::find($asset_id);
             if ($delete != null) {
                 $delete->delete();
-                
+
                 $respose =[
                     'message'=> 'Condition Blocked Successfuly',
                     'statusCode'=> 201
                 ];
-                return response()->json($respose); 
+                return response()->json($respose);
             }
         }
         else{
@@ -402,5 +402,5 @@ class AssetController extends Controller
         }
     }
 
-    
+
 }
