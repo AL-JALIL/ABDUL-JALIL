@@ -70,7 +70,7 @@ class GeographicalLocationsController extends Controller
     */
     public function index()
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Management'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
         {
             $geographicalLocations = DB::table('geographical_locations')
                                 ->join('users', 'users.id', '=', 'geographical_locations.created_by')
@@ -372,7 +372,7 @@ class GeographicalLocationsController extends Controller
             catch (Exception $e)
             {
                 return response()
-                    ->json(['message' => $e->getMessage(),'statusCode'=> 500]);
+                    ->json(['message' => 'Internal server error','statusCode'=> 500,'error'=>$e->getMessage()]);
             }
         }
         else{
