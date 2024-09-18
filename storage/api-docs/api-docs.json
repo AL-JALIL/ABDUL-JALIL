@@ -3290,6 +3290,9 @@
                                     "email": {
                                         "type": "string"
                                     },
+                                    "address": {
+                                        "type": "string"
+                                    },
                                     "gender": {
                                         "type": "string"
                                     },
