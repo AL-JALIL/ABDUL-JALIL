@@ -18,7 +18,7 @@ class DepartmentController extends Controller
         $this->middleware('auth:sanctum');
         $this->middleware('permission:Setup Modules|Create Department|Create Department|Update Department|Update Department|Delete Department', ['only' => ['index','create','store','update','destroy']]);
     }
-    
+
     /**
      * @OA\Get(
      *     path="/api/Departments",
@@ -121,31 +121,72 @@ class DepartmentController extends Controller
     if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Create Department'))
         {
             $user_id = auth()->user()->id;
-    
-            $check_value = DB::select("SELECT department_name FROM departments WHERE LOWER(department_name) = LOWER('$request->department_name')");
+           if($request->parent_id == null){
 
+            $check_value = DB::select("SELECT department_name FROM departments WHERE LOWER(department_name) = LOWER('$request->department_name')");
             if(sizeof($check_value) != 0)
             {
                 $respose =[
                     'message' =>'Identification Name Alraedy Exists',
                     'statusCode'=> 400
                 ];
-    
-                return response()->json($respose);       
+
+                return response()->json($respose);
             }
+           }else{
+            // dd('yooo');
+            $check_value = DB::select("SELECT department_name FROM departments WHERE department_id = $request->parent_id");
+             if(sizeof($check_value) == 0)
+            {
+                $respose =[
+                    'message' =>' Parent ID Not Exists',
+                    'statusCode'=> 400
+                ];
+
+                return response()->json($respose);
+            }
+            else{
+                $check_value = DB::select("SELECT department_name FROM departments WHERE LOWER(department_name) = LOWER(?) AND parent_id = ?", [
+                    $request->department_name,
+                    $request->parent_id
+                ]);
+                if(sizeof($check_value) != 0)
+            {
+                $respose =[
+                    'message' =>'Department Name Alraedy Exists',
+                    'statusCode'=> 400
+                ];
+
+                return response()->json($respose);
+            }
+            }
+           }
+
+
+
+
+            // if(sizeof($check_value) != 0)
+            // {
+            //     $respose =[
+            //         'message' =>'Identification Name Alraedy Exists',
+            //         'statusCode'=> 400
+            //     ];
+
+            //     return response()->json($respose);
+            // }
 
             try{
-                $department = Department::create([ 
+                $department = Department::create([
                     'department_name' => $request->department_name,
                     'parent_id'=>$request->parent_id,
                     'created_by' => $user_id
                 ]);
-        
+
                 $respose =[
                     'message' =>'department Inserted Successfully',
                     'statusCode'=> 201
                 ];
-        
+
                 return response()->json($respose);
             }
             catch (Exception $e)
@@ -211,7 +252,7 @@ class DepartmentController extends Controller
                                 ->where('departments.department_id', '=',$department_id)
                                 ->get();
 
-            if (sizeof($department) > 0) 
+            if (sizeof($department) > 0)
             {
                 $respose =[
                     'data' => $department,
@@ -224,7 +265,7 @@ class DepartmentController extends Controller
                 return response()
                 ->json(['message' => 'No Department Found','statusCode'=> 400]);
             }
-                
+
         }
         else{
             return response()
@@ -283,7 +324,7 @@ class DepartmentController extends Controller
 /// update department
     public function update(Request $request, string $department_id)
     {
-       
+
         if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Update Department'))
         {
 
@@ -295,10 +336,10 @@ class DepartmentController extends Controller
                     'message' =>'Department Name Alraedy Exists',
                     'statusCode'=> 400
                 ];
-    
-                return response()->json($respose);       
+
+                return response()->json($respose);
             }
-            
+
 
             $user_id = auth()->user()->id;
             try{
@@ -312,18 +353,18 @@ class DepartmentController extends Controller
                     'message' =>'Department Updated Successfully',
                     'statusCode'=> 201
                 ];
-                return response()->json($respose); 
+                return response()->json($respose);
             }
             catch (Exception $e)
             {
                 return response()
                     ->json(['message' => $e->getMessage(),'statusCode'=> 401]);
             }
-        }  
+        }
         else{
             return response()
                 ->json(['message' => 'unAuthenticated','statusCode'=> 401]);
-        } 
+        }
     }
 
     /**
@@ -366,12 +407,12 @@ class DepartmentController extends Controller
             $delete = Department::find($department_id);
             if ($delete != null) {
                 $delete->delete();
-                
+
                 $respose =[
                     'message'=> 'Department Blocked Successfuly',
                     'statusCode'=> 201
                 ];
-                return response()->json($respose); 
+                return response()->json($respose);
             }
         }
         else{

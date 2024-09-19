@@ -18,7 +18,7 @@ class WorkingStationsController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->middleware('permission:Setup Management|Create Work Station|Create Work Station|Update Work Station|Update Work Station|Delete Work Station', ['only' => ['index','create','store','update','destroy']]);
+        $this->middleware('permission:Setup Modules|View Work Station|Create Work Station|Update Work Station|Delete Work Station', ['only' => ['index','store','update','destroy']]);
     }
 
     /**
@@ -438,9 +438,9 @@ class WorkingStationsController extends Controller
             ]);
 
             if($data->fails()){
-                return response()->json($data->errors());       
+                return response()->json($data->errors());
             }
-            
+
             try{
                 $path = $request->file('upload_excel')->getRealPath();
                 $data = Excel::import(new WorkingStationsImport,request()->file('upload_excel'));
@@ -455,12 +455,12 @@ class WorkingStationsController extends Controller
                 return response()
                     ->json(['message' => $e->getMessage(),'statusCode'=> 500]);
             }
-            
+
         }
         else if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Create Work Station'))
         {
             $user_id = auth()->user()->id;
-    
+
             $check_value = DB::select("SELECT working_station_name FROM working_stations WHERE LOWER(working_station_name) = LOWER('$request->working_station_name')");
 
             if(sizeof($check_value) != 0)
@@ -469,8 +469,8 @@ class WorkingStationsController extends Controller
                     'message' =>'Working Station Name Alraedy Exists',
                     'statusCode'=> 400
                 ];
-    
-                return response()->json($respose);       
+
+                return response()->json($respose);
             }
 
             try{
@@ -481,12 +481,12 @@ class WorkingStationsController extends Controller
                     'admin_hierarchy_id' => $request->admin_hierarchy_id,
                     'created_by' => $user_id
                 ]);
-        
+
                 $respose =[
                     'message' =>'Working Station Inserted Successfully',
                     'statusCode'=> 201
                 ];
-        
+
                 return response()->json($respose);
             }
             catch (Exception $e)
@@ -554,7 +554,7 @@ class WorkingStationsController extends Controller
     */
     public function show(string $working_station_id)
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Management'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Modules'))
         {
             $workingStations = DB::table('working_stations')
                                 ->join('users', 'users.id', '=', 'working_stations.created_by')
@@ -564,7 +564,7 @@ class WorkingStationsController extends Controller
                                 ->where('working_stations.working_station_id', '=',$working_station_id)
                                 ->get();
 
-            if (sizeof($workingStations) > 0) 
+            if (sizeof($workingStations) > 0)
             {
                 $respose =[
                     'data' => $workingStations,
@@ -577,7 +577,7 @@ class WorkingStationsController extends Controller
                 return response()
                 ->json(['message' => 'No Working Station Found','statusCode'=> 400]);
             }
-                
+
         }
         else{
             return response()
@@ -644,8 +644,8 @@ class WorkingStationsController extends Controller
                     'message' =>'Working Station Name Alraedy Exists',
                     'statusCode'=> 400
                 ];
-    
-                return response()->json($respose);       
+
+                return response()->json($respose);
             }
 
         if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Update Upload Types'))
@@ -663,18 +663,18 @@ class WorkingStationsController extends Controller
                     'message' =>'Working Station Updated Successfully',
                     'statusCode'=> 201
                 ];
-                return response()->json($respose); 
+                return response()->json($respose);
             }
             catch (Exception $e)
             {
                 return response()
                     ->json(['message' => $e->getMessage(),'statusCode'=> 500]);
             }
-        }  
+        }
         else{
             return response()
                 ->json(['message' => 'unAuthenticated','statusCode'=> 401]);
-        } 
+        }
     }
 
     /**
@@ -716,12 +716,12 @@ class WorkingStationsController extends Controller
             $delete = WorkingStations::find($working_station_id);
             if ($delete != null) {
                 $delete->delete();
-                
+
                 $respose =[
                     'message'=> 'Working Station Blocked Successfuly',
                     'statusCode'=> 201
                 ];
-                return response()->json($respose); 
+                return response()->json($respose);
             }
         }
         else{
