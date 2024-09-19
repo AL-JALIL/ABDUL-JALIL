@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
-class Asset extends Model
+class AssetDepartments extends Model
 {
     use LogsActivity, HasFactory, SoftDeletes;
 
@@ -17,14 +17,14 @@ class Asset extends Model
     *
     * @var string
     */
-    protected $table = 'assets';
+    protected $table = 'asset_departments';
 
     /**
     * The primary key associated with the table.
     *
     * @var string
     */
-    protected $primaryKey = 'asset_id';
+    protected $primaryKey = 'asset_department_id';
 
     /**
     * Indicates if the model's ID is not auto-incrementing.
@@ -38,7 +38,7 @@ class Asset extends Model
     *
     * @var string
     */
-    protected $keyType = 'string';
+    protected $keyType = 'integer';
 
     /**
     * The attributes that are mass assignable.
@@ -46,9 +46,13 @@ class Asset extends Model
     * @var array
     */
     protected $fillable = [
-        'asset_name',
-        'serial_number',
-        'code',
+        'uuid',
+        'asset_id',
+        'department_id',
+        'condition_id',
+        'start_date',
+        'registration_number',
+        'status',
         'created_by',
     ];
 

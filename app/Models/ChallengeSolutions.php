@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
-class TransferAsset extends Model
+class ChallengeSolutions extends Model
 {
     use LogsActivity, HasFactory, SoftDeletes;
     
@@ -17,14 +17,14 @@ class TransferAsset extends Model
     *
     * @var string
     */
-    protected $table = 'transferAsset';
+    protected $table = 'chalenge_solutions';
 
     /**
     * The primary key associated with the table.
     *
     * @var string
     */
-    protected $primaryKey = 'transfer_asset_type';
+    protected $primaryKey = 'chalenge_solution_id';
 
     /**
     * Indicates if the model's ID is not auto-incrementing.
@@ -38,7 +38,7 @@ class TransferAsset extends Model
     *
     * @var string
     */
-    protected $keyType = 'string';
+    protected $keyType = 'integer';
 
     /**
     * The attributes that are mass assignable.
@@ -46,7 +46,11 @@ class TransferAsset extends Model
     * @var array
     */
     protected $fillable = [
-        'transfer_asset_type',
+        'uuid',
+        'solution',
+        'solution_file',
+        'chalenge_id',
+        'status',
         'created_by'
     ];
 

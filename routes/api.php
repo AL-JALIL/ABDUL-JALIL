@@ -43,13 +43,28 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('unBlockUploadTypes/{upload_types_id}', [App\Http\Controllers\API\Setup\UnBlockCotroller::class, 'unblock_upload_types'])->name('unBlockUploadTypes');
     Route::get('unBlockUser/{user_id}', [App\Http\Controllers\API\Setup\UnBlockCotroller::class, 'unblock_user'])->name('unBlockUser');
     
+    Route::resource('departments', App\Http\Controllers\API\Setup\DepartmentController::class);
+    Route::resource('assets', App\Http\Controllers\API\Setup\AssetController::class);
+    Route::resource('conditions', App\Http\Controllers\API\Setup\ConditionController::class);
 
-    Route::resource('Departments', App\Http\Controllers\API\Setup\DepartmentController::class);
-    Route::resource('Assets', App\Http\Controllers\API\Setup\AssetController::class);
-    Route::resource('Conditions', App\Http\Controllers\API\Setup\ConditionController::class);
-    Route::resource('assetDepartments', App\Http\Controllers\API\Setup\AssetDepartmentController::class);
-    Route::resource('transferAssets', App\Http\Controllers\API\Setup\TransferAssetController::class);
-    Route::resource('responsiblePersons', App\Http\Controllers\API\Setup\ResponsiblePersonController::class);
-    Route::resource('Chalenges', App\Http\Controllers\API\Setup\ChallengeControler::class);
-    Route::resource('ChalengeSolutions', App\Http\Controllers\API\Setup\ChalengeSolutionController::class);
+    Route::get('assetDepartment', [App\Http\Controllers\API\Management\Module\Asserts\AssertController::class, 'asset_department'])->name('assetDepartment');
+    Route::post('storeAssertDepartment', [App\Http\Controllers\API\Management\Module\Asserts\AssertController::class, 'store_assert_department'])->name('storeAssertDepartment');
+    Route::get('viewAssertDepartment', [App\Http\Controllers\API\Management\Module\Asserts\AssertController::class, 'view_assert_department'])->name('viewAssertDepartment');
+    Route::patch('updateAssertDepartment', [App\Http\Controllers\API\Management\Module\Asserts\AssertController::class, 'update_assert_department'])->name('updateAssertDepartment');
+    Route::delete('destroyAssertDepartment', [App\Http\Controllers\API\Management\Module\Asserts\AssertController::class, 'destroy_assert_department'])->name('destroyAssertDepartment');
+    Route::post('transferAssert', [App\Http\Controllers\API\Management\Module\Asserts\AssertController::class, 'transfer_assert'])->name('transferAssert');
+
+
+    Route::get('viewChallenge', [ App\Http\Controllers\API\Management\Module\ProblemSolution\ChallengeController::class, 'view_challenge'])->name('viewChallenge');
+    Route::post('storeChallenge', [ App\Http\Controllers\API\Management\Module\ProblemSolution\ChallengeController::class, 'store_challenge'])->name('storeChallenge');
+    Route::get('showChallenge/{chalenge_id}', [ App\Http\Controllers\API\Management\Module\ProblemSolution\ChallengeController::class, 'show_challenge'])->name('showChallenge');
+    Route::delete('destroyChallenge', [ App\Http\Controllers\API\Management\Module\ProblemSolution\ChallengeController::class, 'destroy_challenge'])->name('destroyChallenge');
+    Route::post('storeSolution', [ App\Http\Controllers\API\Management\Module\ProblemSolution\ChallengeController::class, 'store_solution'])->name('storeSolution');
+    Route::delete('destroySolution', [ App\Http\Controllers\API\Management\Module\ProblemSolution\ChallengeController::class, 'destroy_solution'])->name('destroySolution');
+
+    Route::get('getDefaultHeadCount', [App\Http\Controllers\API\Management\DashboardController::class, 'get_default_year'])->name('getDefaultHeadCount');
+    Route::get('getDefaultHeadCount', [App\Http\Controllers\API\Management\DashboardController::class, 'get_default_year'])->name('getDefaultHeadCount');
+    Route::get('getDefaultHeadCount', [App\Http\Controllers\API\Management\DashboardController::class, 'get_default_year'])->name('getDefaultHeadCount');
+
+
 });

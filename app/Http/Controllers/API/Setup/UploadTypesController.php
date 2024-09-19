@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\UploadTypesImport;
 use App\Models\UploadTypes;
+use Illuminate\Support\Str;
 use Exception;
 use Validator;
 use DB;
@@ -181,6 +182,7 @@ class UploadTypesController extends Controller
 
             try{
                 $UploadTypes = UploadTypes::create([ 
+                    'uuid' => Str::uuid(),
                     'upload_name' => $request->upload_name,
                     'created_by' => $user_id
                 ]);

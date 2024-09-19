@@ -8,23 +8,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
-class TransferAsset extends Model
+class Departments extends Model
 {
     use LogsActivity, HasFactory, SoftDeletes;
-    
+
     /**
     * The table associated with the model.
     *
     * @var string
     */
-    protected $table = 'transfer_assets';
+    protected $table = 'departments';
 
     /**
     * The primary key associated with the table.
     *
     * @var string
     */
-    protected $primaryKey = 'transfer_asset_id';
+    protected $primaryKey = 'department_id';
 
     /**
     * Indicates if the model's ID is not auto-incrementing.
@@ -38,7 +38,7 @@ class TransferAsset extends Model
     *
     * @var string
     */
-    protected $keyType = 'string';
+    protected $keyType = 'integer';
 
     /**
     * The attributes that are mass assignable.
@@ -46,11 +46,10 @@ class TransferAsset extends Model
     * @var array
     */
     protected $fillable = [
-        'department_id',
-        'registration_number',
-        'transfer_type',
-        'reason',
-        'created_by',
+        'uuid',
+        'department_name',
+        'parent_id',
+        'created_by'
     ];
 
     /**

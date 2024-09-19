@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\WorkingStationsImport;
 use App\Models\WorkingStations;
+use Illuminate\Support\Str;
 use Exception;
 use Validator;
 use DB;
@@ -67,7 +68,6 @@ class WorkingStationsController extends Controller
     */
     public function index()
     {
-        
         if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL'))
         {
             $workingStation = DB::table('working_stations')
@@ -475,6 +475,7 @@ class WorkingStationsController extends Controller
 
             try{
                 $WorkingStations = WorkingStations::create([
+                    'uuid' => Str::uuid(),
                     'working_station_name' => $request->working_station_name,
                     'location_id' => $request->location_id,
                     'admin_hierarchy_id' => $request->admin_hierarchy_id,

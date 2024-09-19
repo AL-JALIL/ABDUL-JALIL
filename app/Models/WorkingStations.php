@@ -38,7 +38,7 @@ class WorkingStations extends Model
     *
     * @var string
     */
-    protected $keyType = 'string';
+    protected $keyType = 'integer';
 
     /**
     * The attributes that are mass assignable.
@@ -46,6 +46,7 @@ class WorkingStations extends Model
     * @var array
     */
     protected $fillable = [
+        'uuid',
         'working_station_name',
         'created_by',
         'location_id',

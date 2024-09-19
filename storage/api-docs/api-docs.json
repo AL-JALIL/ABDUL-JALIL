@@ -12,6 +12,1015 @@
         }
     ],
     "paths": {
+        "/api/assetDepartment": {
+            "get": {
+                "tags": [
+                    "assetDepartments"
+                ],
+                "summary": "Get a list of asset departments",
+                "operationId": "1ce5549baea42b2ab4022ea4d3177f53",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "asset_department_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "uuid": {
+                                                        "type": "string"
+                                                    },
+                                                    "asset_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "asset_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "serial_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "code": {
+                                                        "type": "string"
+                                                    },
+                                                    "registration_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "department_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "condition_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "condition_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "start_date": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "assert_status": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_by": {
+                                                        "type": "integer"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/storeAssertDepartment": {
+            "post": {
+                "tags": [
+                    "assetDepartments"
+                ],
+                "summary": "Store a new assert department",
+                "operationId": "5dce778f682e23d4a6712123cc32fc51",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "asserts": {
+                                        "type": "array",
+                                        "items": {
+                                            "properties": {
+                                                "assert_id": {
+                                                    "type": "integer"
+                                                },
+                                                "condition_id": {
+                                                    "type": "integer"
+                                                },
+                                                "registration_number": {
+                                                    "type": "integer"
+                                                },
+                                                "start_date": {
+                                                    "type": "string",
+                                                    "format": "date-time"
+                                                },
+                                                "department_id": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/viewAssertDepartment/{asset_department_id}": {
+            "get": {
+                "tags": [
+                    "assetDepartments"
+                ],
+                "summary": "Get a specific asset department",
+                "operationId": "67881a6eaf8157e420b446242a9ea962",
+                "parameters": [
+                    {
+                        "name": "asset_department_id",
+                        "in": "path",
+                        "description": "Asset Department ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "asset_department_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "uuid": {
+                                                        "type": "string"
+                                                    },
+                                                    "asset_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "asset_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "serial_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "code": {
+                                                        "type": "string"
+                                                    },
+                                                    "registration_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "department_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "condition_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "condition_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "start_date": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "assert_status": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_by": {
+                                                        "type": "integer"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Asset department not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "No asset_department Found"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 404
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 401
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/updateAssertDepartment/{asset_department_id}": {
+            "put": {
+                "tags": [
+                    "assetDepartments"
+                ],
+                "summary": "Update a asset departments",
+                "operationId": "abbb46e8a9c663b305db1f00a5be4bb0",
+                "parameters": [
+                    {
+                        "name": "asset_department_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "asset_id": {
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "department_id": {
+                                        "type": "integer"
+                                    },
+                                    "condition_id": {
+                                        "type": "integer"
+                                    },
+                                    "registration_number": {
+                                        "type": "string"
+                                    },
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "assert_status": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/destroyAssertDepartment/{asset_department_id}": {
+            "delete": {
+                "tags": [
+                    "assetDepartments"
+                ],
+                "summary": "Delete a destroy assert department",
+                "operationId": "083f68847a3c057add671cec4e9296c7",
+                "parameters": [
+                    {
+                        "name": "asset_department_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/transferAssert": {
+            "post": {
+                "tags": [
+                    "assetDepartments"
+                ],
+                "summary": "Update transfer assert",
+                "operationId": "c464e8462f9f1e688a4ee5db3c86389d",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "start_date": {
+                                        "type": "string",
+                                        "format": "date-time"
+                                    },
+                                    "department_id": {
+                                        "type": "integer"
+                                    },
+                                    "asset_id": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/viewChallenge": {
+            "get": {
+                "tags": [
+                    "challenges"
+                ],
+                "summary": "Get a list of challenges",
+                "operationId": "8357e0f7dfbf0ea290690b7d8e126ae9",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "chalenge_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "uuid": {
+                                                        "type": "string"
+                                                    },
+                                                    "challenge_title": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "department_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "integer"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/storeChallenge": {
+            "post": {
+                "tags": [
+                    "challenges"
+                ],
+                "summary": "Store a new challenges",
+                "operationId": "e0cc469ecc3aca63dcd557ddbadef0db",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "challenge_title": {
+                                        "type": "string"
+                                    },
+                                    "department_id": {
+                                        "type": "integer"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "challenge_file": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/showChallenge/{chalenge_id}": {
+            "get": {
+                "tags": [
+                    "challenges"
+                ],
+                "summary": "Get a specific challenges",
+                "operationId": "748f8954824e2fdaef263895292bde4b",
+                "parameters": [
+                    {
+                        "name": "chalenge_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "chalenge_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "uuid": {
+                                                        "type": "string"
+                                                    },
+                                                    "challenge_title": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "status": {
+                                                        "type": "string"
+                                                    },
+                                                    "department_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "department_name": {
+                                                        "type": "integer"
+                                                    },
+                                                    "user_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "statusCode": {
+                                            "type": "integer",
+                                            "example": 200
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/destroyChallenge/{chalenge_id}": {
+            "delete": {
+                "tags": [
+                    "challenges"
+                ],
+                "summary": "Delete an challenges",
+                "operationId": "d822eb555846e062110649d693dbc9e6",
+                "parameters": [
+                    {
+                        "name": "chalenge_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/storeSolution": {
+            "post": {
+                "tags": [
+                    "challenges"
+                ],
+                "summary": "Store a challenges solution",
+                "operationId": "0a1d3f7a0193ba89a8a67ac25adf972a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "solution": {
+                                        "type": "string"
+                                    },
+                                    "chalenge_id": {
+                                        "type": "integer"
+                                    },
+                                    "solution_file": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/destroySolution/{chalenge_solution_id}": {
+            "delete": {
+                "tags": [
+                    "challenges"
+                ],
+                "summary": "Delete a chalenge solution_",
+                "operationId": "73d7bee4799aa97487436962c6c54710",
+                "parameters": [
+                    {
+                        "name": "chalenge_solution_id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "statusCode": {
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/adminHierarchies": {
             "get": {
                 "tags": [
@@ -405,7 +1414,7 @@
         "/api/assets": {
             "get": {
                 "tags": [
-                    "assets"
+                    "asset"
                 ],
                 "summary": "Get a list of assets",
                 "operationId": "62a8049651a178012b0a8d9a7c66fc7e",
@@ -437,34 +1446,43 @@
                                             "items": {
                                                 "properties": {
                                                     "asset_id": {
-                                                        "type": "integer",
-                                                        "example": 1
+                                                        "type": "integer"
                                                     },
                                                     "asset_name": {
-                                                        "type": "string",
-                                                        "example": "Laptop"
+                                                        "type": "string"
+                                                    },
+                                                    "uuid": {
+                                                        "type": "string"
                                                     },
                                                     "serial_number": {
-                                                        "type": "string",
-                                                        "example": "SN123456"
+                                                        "type": "string"
                                                     },
                                                     "code": {
-                                                        "type": "string",
-                                                        "example": "LAP-001"
+                                                        "type": "string"
                                                     },
                                                     "created_by": {
-                                                        "type": "integer",
-                                                        "example": 1
+                                                        "type": "integer"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string"
                                                     },
                                                     "created_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
                                                     },
                                                     "updated_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
                                                     }
                                                 },
                                                 "type": "object"
@@ -479,51 +1497,29 @@
                                 }
                             }
                         }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
                     }
                 }
             },
             "post": {
                 "tags": [
-                    "assets"
+                    "asset"
                 ],
-                "summary": "Create a new asset",
+                "summary": "Store a new assets",
                 "operationId": "e563897b93239b1f28030ce31eda95d5",
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
                                     "asset_name": {
-                                        "type": "string",
-                                        "example": "Laptop"
+                                        "type": "string"
                                     },
                                     "serial_number": {
-                                        "type": "string",
-                                        "example": "SN123456"
+                                        "type": "string"
                                     },
                                     "code": {
-                                        "type": "string",
-                                        "example": "LAP-001"
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -532,59 +1528,33 @@
                     }
                 },
                 "responses": {
-                    "201": {
-                        "description": "Asset created successfully",
-                        "content": {
-                            "application/json": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Asset Inserted Successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 201
-                                        }
-                                    },
-                                    "type": "object"
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
                                 }
                             }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "type": "string",
-                                            "example": "Identification Already Exists"
+                                            "type": "string"
                                         },
                                         "statusCode": {
-                                            "type": "integer",
-                                            "example": 400
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "unAuthenticated"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
+                                            "type": "integer"
                                         }
                                     },
                                     "type": "object"
@@ -598,9 +1568,9 @@
         "/api/assets/{asset_id}": {
             "get": {
                 "tags": [
-                    "assets"
+                    "asset"
                 ],
-                "summary": "Get a specific asset",
+                "summary": "Get a specific department",
                 "operationId": "ffbde56919f8e3893038fbd6ff7cfdfa",
                 "parameters": [
                     {
@@ -608,95 +1578,80 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "data": {
-                                            "properties": {
-                                                "asset_id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "asset_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "uuid": {
+                                                        "type": "string"
+                                                    },
+                                                    "serial_number": {
+                                                        "type": "string"
+                                                    },
+                                                    "code": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_by": {
+                                                        "type": "integer"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
                                                 },
-                                                "asset_name": {
-                                                    "type": "string",
-                                                    "example": "Laptop"
-                                                },
-                                                "serial_number": {
-                                                    "type": "string",
-                                                    "example": "SN123456"
-                                                },
-                                                "code": {
-                                                    "type": "string",
-                                                    "example": "LAP-001"
-                                                },
-                                                "created_by": {
-                                                    "type": "integer",
-                                                    "example": 1
-                                                },
-                                                "created_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-08-28 11:30:25"
-                                                },
-                                                "updated_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-08-28 11:30:25"
-                                                }
-                                            },
-                                            "type": "object"
+                                                "type": "object"
+                                            }
                                         },
                                         "statusCode": {
                                             "type": "integer",
                                             "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "No asset Found"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 400
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "unAuthenticated"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
                                         }
                                     },
                                     "type": "object"
@@ -708,14 +1663,15 @@
             },
             "put": {
                 "tags": [
-                    "assets"
+                    "asset_id"
                 ],
-                "summary": "Update an asset",
+                "summary": "Update an existing assets",
                 "operationId": "e866d5b6979112cb2c1117e4e9b65eee",
                 "parameters": [
                     {
                         "name": "asset_id",
                         "in": "path",
+                        "description": "Department ID",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -723,6 +1679,7 @@
                     }
                 ],
                 "requestBody": {
+                    "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
@@ -746,59 +1703,33 @@
                     }
                 },
                 "responses": {
-                    "201": {
-                        "description": "Asset updated successfully",
-                        "content": {
-                            "application/json": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Asset Updated Successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 201
-                                        }
-                                    },
-                                    "type": "object"
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
                                 }
                             }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "type": "string",
-                                            "example": "asset Name Already Exists"
+                                            "type": "string"
                                         },
                                         "statusCode": {
-                                            "type": "integer",
-                                            "example": 400
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "unAuthenticated"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
+                                            "type": "integer"
                                         }
                                     },
                                     "type": "object"
@@ -825,39 +1756,33 @@
                     }
                 ],
                 "responses": {
-                    "201": {
-                        "description": "Asset deleted successfully",
-                        "content": {
-                            "application/json": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Asset Blocked Successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 201
-                                        }
-                                    },
-                                    "type": "object"
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
                                 }
                             }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "type": "string",
-                                            "example": "unAuthenticated"
+                                            "type": "string"
                                         },
                                         "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
+                                            "type": "integer"
                                         }
                                     },
                                     "type": "object"
@@ -868,514 +1793,32 @@
                 }
             }
         },
-        "/api/assetDepartments": {
-            "get": {
-                "tags": [
-                    "assetDepartments"
-                ],
-                "summary": "Get a list of asset departments",
-                "operationId": "84af882bd2797d91d66587834912c56c",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "asset_id": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "department_id": {
-                                                        "type": "integer",
-                                                        "example": 2
-                                                    },
-                                                    "condition_id": {
-                                                        "type": "integer",
-                                                        "example": 3
-                                                    },
-                                                    "start_date": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-09-01 10:30:45"
-                                                    },
-                                                    "status": {
-                                                        "type": "string",
-                                                        "example": "Active"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            },
-            "post": {
-                "tags": [
-                    "assetDepartments"
-                ],
-                "summary": "Create a new asset department",
-                "operationId": "f742440fb8b2bb2c1eb7b6f1c1537f55",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "asset_id": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "department_id": {
-                                        "type": "integer",
-                                        "example": 2
-                                    },
-                                    "condition_id": {
-                                        "type": "integer",
-                                        "example": 3
-                                    },
-                                    "registration_number": {
-                                        "type": "string",
-                                        "example": "12345XYZ"
-                                    },
-                                    "status": {
-                                        "type": "string",
-                                        "example": "Active"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Asset department created successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Asset department Inserted Successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 201
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Asset not found"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 404
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            }
-        },
-        "/api/assetDepartments/{id}": {
-            "get": {
-                "tags": [
-                    "assetDepartments"
-                ],
-                "summary": "Get a specific asset department by ID",
-                "operationId": "b06006592fd40260fcf9c35ae5550698",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Asset Department ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "properties": {
-                                                "asset_id": {
-                                                    "type": "integer",
-                                                    "example": 1
-                                                },
-                                                "department_id": {
-                                                    "type": "integer",
-                                                    "example": 2
-                                                },
-                                                "condition_id": {
-                                                    "type": "integer",
-                                                    "example": 3
-                                                },
-                                                "start_date": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-09-01 10:30:45"
-                                                },
-                                                "status": {
-                                                    "type": "string",
-                                                    "example": "Active"
-                                                }
-                                            },
-                                            "type": "object"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Asset department not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "No asset_department Found"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 404
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            },
-            "put": {
-                "tags": [
-                    "assetDepartments"
-                ],
-                "summary": "Update an existing asset department",
-                "operationId": "4fbfe7c4e535284a28e2fbac3c176abc",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Asset Department ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "asset_id": {
-                                        "type": "integer",
-                                        "example": 1
-                                    },
-                                    "department_id": {
-                                        "type": "integer",
-                                        "example": 2
-                                    },
-                                    "condition_id": {
-                                        "type": "integer",
-                                        "example": 3
-                                    },
-                                    "registration_number": {
-                                        "type": "string",
-                                        "example": "12345XYZ"
-                                    },
-                                    "status": {
-                                        "type": "string",
-                                        "example": "Active"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Asset department updated successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Asset department Updated Successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Asset department not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Asset department not found"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 404
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            },
-            "delete": {
-                "tags": [
-                    "assetDepartments"
-                ],
-                "summary": "Delete an asset department",
-                "operationId": "079acf9f6019e53ca9b87eacf5c73b81",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Asset Department ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Asset department deleted successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Asset Department Deleted Successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Asset department not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Asset department not found"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 404
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            }
-        },
         "/api/conditions": {
             "get": {
                 "tags": [
-                    "conditions"
+                    "condition"
                 ],
                 "summary": "Get a list of conditions",
                 "operationId": "da1f145bae399d94951bbe6f1cb0fb98",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1385,22 +1828,37 @@
                                             "items": {
                                                 "properties": {
                                                     "condition_id": {
-                                                        "type": "integer",
-                                                        "example": 1
+                                                        "type": "integer"
+                                                    },
+                                                    "uuid": {
+                                                        "type": "string"
                                                     },
                                                     "condition_name": {
-                                                        "type": "string",
-                                                        "example": "New"
+                                                        "type": "string"
+                                                    },
+                                                    "created_by": {
+                                                        "type": "integer"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string"
                                                     },
                                                     "created_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
                                                     },
                                                     "updated_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1409,26 +1867,6 @@
                                         "statusCode": {
                                             "type": "integer",
                                             "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
                                         }
                                     },
                                     "type": "object"
@@ -1442,9 +1880,9 @@
         "/api/conditions/{condition_id}": {
             "get": {
                 "tags": [
-                    "conditions"
+                    "condition"
                 ],
-                "summary": "Get a specific condition",
+                "summary": "Get a specific conditions",
                 "operationId": "54a209c2af7b2bcc65c0133f7d4be790",
                 "parameters": [
                     {
@@ -1459,6 +1897,22 @@
                 "responses": {
                     "200": {
                         "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1468,22 +1922,37 @@
                                             "items": {
                                                 "properties": {
                                                     "condition_id": {
-                                                        "type": "integer",
-                                                        "example": 1
+                                                        "type": "integer"
+                                                    },
+                                                    "uuid": {
+                                                        "type": "string"
                                                     },
                                                     "condition_name": {
-                                                        "type": "string",
-                                                        "example": "New"
+                                                        "type": "string"
+                                                    },
+                                                    "created_by": {
+                                                        "type": "integer"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string"
                                                     },
                                                     "created_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
                                                     },
                                                     "updated_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1498,54 +1967,14 @@
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "description": "No condition found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "No condition Found"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 400
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "conditions"
+                    "condition"
                 ],
-                "summary": "Delete a specific condition",
+                "summary": "Delete an conditions",
                 "operationId": "9ea394eb17e9c489b166bae9aad06f5f",
                 "parameters": [
                     {
@@ -1553,44 +1982,38 @@
                         "in": "path",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "type": "integer"
                         }
                     }
                 ],
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Successful operation",
-                        "content": {
-                            "application/json": {
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Condition Blocked Successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 201
-                                        }
-                                    },
-                                    "type": "object"
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
                                 }
                             }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
+                                            "type": "string"
                                         },
                                         "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
+                                            "type": "integer"
                                         }
                                     },
                                     "type": "object"
@@ -3002,39 +3425,34 @@
                                                         "example": "efdbd310-5cb7-4e94-b2dd-010185ddac95"
                                                     },
                                                     "parent_upload_name": {
-                                                        "type": "string",
-                                                        "example": "ROLE NATIONAL"
+                                                        "type": "string"
+                                                    },
+                                                    "isSelected": {
+                                                        "type": "boolean"
                                                     },
                                                     "created_by": {
-                                                        "type": "integer",
-                                                        "example": 1
+                                                        "type": "integer"
                                                     },
                                                     "first_name": {
-                                                        "type": "string",
-                                                        "example": "Mohammed"
+                                                        "type": "string"
                                                     },
                                                     "middle_name": {
-                                                        "type": "string",
-                                                        "example": "Abdalla"
+                                                        "type": "string"
                                                     },
                                                     "last_name": {
-                                                        "type": "string",
-                                                        "example": "Bakar"
+                                                        "type": "string"
                                                     },
                                                     "created_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
                                                     },
                                                     "deleted_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
                                                     },
                                                     "updated_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
                                                     }
                                                 },
                                                 "type": "object"
@@ -3065,6 +3483,9 @@
                             "schema": {
                                 "properties": {
                                     "parent_upload_name": {
+                                        "type": "string"
+                                    },
+                                    "education_level_id": {
                                         "type": "string"
                                     },
                                     "upload_type_id": {
@@ -3170,39 +3591,34 @@
                                                         "example": "efdbd310-5cb7-4e94-b2dd-010185ddac95"
                                                     },
                                                     "parent_upload_name": {
-                                                        "type": "string",
-                                                        "example": "ROLE NATIONAL"
+                                                        "type": "string"
+                                                    },
+                                                    "isSelected": {
+                                                        "type": "boolean"
                                                     },
                                                     "created_by": {
-                                                        "type": "integer",
-                                                        "example": 1
+                                                        "type": "integer"
                                                     },
                                                     "first_name": {
-                                                        "type": "string",
-                                                        "example": "Mohammed"
+                                                        "type": "string"
                                                     },
                                                     "middle_name": {
-                                                        "type": "string",
-                                                        "example": "Abdalla"
+                                                        "type": "string"
                                                     },
                                                     "last_name": {
-                                                        "type": "string",
-                                                        "example": "Bakar"
+                                                        "type": "string"
                                                     },
                                                     "created_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
                                                     },
                                                     "deleted_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
                                                     },
                                                     "updated_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
                                                     }
                                                 },
                                                 "type": "object"
@@ -3346,1002 +3762,6 @@
                         }
                     }
                 }
-            }
-        },
-        "/api/responsiblePersons": {
-            "get": {
-                "tags": [
-                    "responsiblePersons"
-                ],
-                "summary": "Get a list of responsible persons",
-                "operationId": "a023e4d3ba602cddc72882ee7344f23a",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "responsible_person_id": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "payroll": {
-                                                        "type": "string",
-                                                        "example": "P12345"
-                                                    },
-                                                    "registration_number": {
-                                                        "type": "string",
-                                                        "example": "REG123456"
-                                                    },
-                                                    "date": {
-                                                        "type": "string",
-                                                        "format": "date",
-                                                        "example": "2024-01-01"
-                                                    },
-                                                    "status": {
-                                                        "type": "string",
-                                                        "example": "Active"
-                                                    },
-                                                    "created_by": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "created_at": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-01-01T00:00:00Z"
-                                                    },
-                                                    "updated_at": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-01-01T00:00:00Z"
-                                                    },
-                                                    "deleted_at": {
-                                                        "type": "string",
-                                                        "format": "date-time",
-                                                        "example": null
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            },
-            "post": {
-                "tags": [
-                    "responsiblePersons"
-                ],
-                "summary": "Create a new responsible person",
-                "operationId": "2cda8ddd5e216bccfce5b1113958f0bc",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "payroll": {
-                                        "type": "string",
-                                        "example": "P12345"
-                                    },
-                                    "registration_number": {
-                                        "type": "string",
-                                        "example": "REG123456"
-                                    },
-                                    "date": {
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "2024-01-01"
-                                    },
-                                    "status": {
-                                        "type": "string",
-                                        "example": "Active"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Responsible person created successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Responsible person inserted successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 201
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Registration number already exists"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 400
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            }
-        },
-        "/api/responsiblePersons/{responsible_person_id}": {
-            "get": {
-                "tags": [
-                    "responsiblePersons"
-                ],
-                "summary": "Get details of a specific responsible person",
-                "operationId": "cb56173f3b5bc87ff05c560706f9b314",
-                "parameters": [
-                    {
-                        "name": "responsible_person_id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "properties": {
-                                                "responsible_person_id": {
-                                                    "type": "integer",
-                                                    "example": 1
-                                                },
-                                                "payroll": {
-                                                    "type": "string",
-                                                    "example": "P12345"
-                                                },
-                                                "registration_number": {
-                                                    "type": "string",
-                                                    "example": "REG123456"
-                                                },
-                                                "date": {
-                                                    "type": "string",
-                                                    "format": "date",
-                                                    "example": "2024-01-01"
-                                                },
-                                                "status": {
-                                                    "type": "string",
-                                                    "example": "Active"
-                                                },
-                                                "created_by": {
-                                                    "type": "integer",
-                                                    "example": 1
-                                                },
-                                                "created_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-01-01T00:00:00Z"
-                                                },
-                                                "updated_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2024-01-01T00:00:00Z"
-                                                },
-                                                "deleted_at": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": null
-                                                }
-                                            },
-                                            "type": "object"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "No responsible person found"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 404
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            },
-            "put": {
-                "tags": [
-                    "responsiblePersons"
-                ],
-                "summary": "Update a responsible person",
-                "operationId": "b7d0cfe67793ddcc3ef5cd42da5911fa",
-                "parameters": [
-                    {
-                        "name": "responsible_person_id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "payroll": {
-                                        "type": "string",
-                                        "example": "P12345"
-                                    },
-                                    "registration_number": {
-                                        "type": "string",
-                                        "example": "REG123456"
-                                    },
-                                    "date": {
-                                        "type": "string",
-                                        "format": "date",
-                                        "example": "2024-01-01"
-                                    },
-                                    "status": {
-                                        "type": "string",
-                                        "example": "Active"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Responsible person updated successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Responsible Person Updated Successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad request",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Registration Number Already Exists"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 400
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Responsible Person Not Found"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 404
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            },
-            "delete": {
-                "tags": [
-                    "responsiblePersons"
-                ],
-                "summary": "Delete a responsible person",
-                "operationId": "e92def726bb1e6204610c581eacc17bf",
-                "parameters": [
-                    {
-                        "name": "responsible_person_id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "204": {
-                        "description": "Responsible person deleted successfully"
-                    },
-                    "404": {
-                        "description": "Not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Responsible person not found"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 404
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            }
-        },
-        "/api/transferAssets": {
-            "get": {
-                "tags": [
-                    "transferAssets"
-                ],
-                "summary": "Get a list of transfer assets",
-                "operationId": "e01bab6f980832a02a85ff9f4b210ebf",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "transfer_asset_id": {
-                                                        "type": "integer",
-                                                        "example": 1
-                                                    },
-                                                    "department_id": {
-                                                        "type": "integer",
-                                                        "example": 2
-                                                    },
-                                                    "registration_number": {
-                                                        "type": "string",
-                                                        "example": "12345XYZ"
-                                                    },
-                                                    "transfer_type": {
-                                                        "type": "string",
-                                                        "example": "Permanent"
-                                                    },
-                                                    "reason": {
-                                                        "type": "string",
-                                                        "example": "Relocation"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            },
-            "post": {
-                "tags": [
-                    "transferAssets"
-                ],
-                "summary": "Create a new transfer asset",
-                "operationId": "afc24e5116087ce19280c1f45e186c46",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "department_id": {
-                                        "type": "integer",
-                                        "example": 2
-                                    },
-                                    "registration_number": {
-                                        "type": "string",
-                                        "example": "12345XYZ"
-                                    },
-                                    "transfer_type": {
-                                        "type": "string",
-                                        "example": "Permanent"
-                                    },
-                                    "reason": {
-                                        "type": "string",
-                                        "example": "Relocation"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Transfer asset created successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Transfer asset created successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 201
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            }
-        },
-        "/api/transferAssets/{transfer_asset_id}": {
-            "get": {
-                "tags": [
-                    "transferAssets"
-                ],
-                "summary": "Get a specific transfer asset by ID",
-                "operationId": "c74a8634aca4e4440c9150b6cb226639",
-                "parameters": [
-                    {
-                        "name": "transfer_asset_id",
-                        "in": "path",
-                        "description": "Transfer Asset ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "object"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "No Transfer Asset Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "No transfer_asset Found"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 400
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            },
-            "put": {
-                "tags": [
-                    "transferAssets"
-                ],
-                "summary": "Update an existing transfer asset",
-                "operationId": "e9607b37c681aa02eb019834f7b86c6b",
-                "parameters": [
-                    {
-                        "name": "transfer_asset_id",
-                        "in": "path",
-                        "description": "Transfer Asset ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "department_id": {
-                                        "type": "integer",
-                                        "example": 2
-                                    },
-                                    "registration_number": {
-                                        "type": "string",
-                                        "example": "12345XYZ"
-                                    },
-                                    "transfer_type": {
-                                        "type": "string",
-                                        "example": "Permanent"
-                                    },
-                                    "reason": {
-                                        "type": "string",
-                                        "example": "Relocation"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Transfer asset updated successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Transfer asset updated successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Registration Number Already Exists",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Registration Number Already Exists"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 400
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Transfer asset not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Transfer asset not found"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 404
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            },
-            "delete": {
-                "tags": [
-                    "transferAssets"
-                ],
-                "summary": "Delete a transfer asset",
-                "operationId": "7ffa7ae80d8db9a05ed8a286a04f6d6a",
-                "parameters": [
-                    {
-                        "name": "transfer_asset_id",
-                        "in": "path",
-                        "description": "Transfer Asset ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Transfer asset deleted successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Transfer Asset Deleted Successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Transfer asset not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Transfer Asset Not Found"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 404
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
             }
         },
         "/api/unBlockUser/{id}": {
@@ -6240,20 +5660,32 @@
     },
     "tags": [
         {
+            "name": "assetDepartments",
+            "description": "assetDepartments"
+        },
+        {
+            "name": "challenges",
+            "description": "challenges"
+        },
+        {
             "name": "adminHierarchies",
             "description": "adminHierarchies"
+        },
+        {
+            "name": "asset",
+            "description": "asset"
+        },
+        {
+            "name": "asset_id",
+            "description": "asset_id"
         },
         {
             "name": "assets",
             "description": "assets"
         },
         {
-            "name": "assetDepartments",
-            "description": "assetDepartments"
-        },
-        {
-            "name": "conditions",
-            "description": "conditions"
+            "name": "condition",
+            "description": "condition"
         },
         {
             "name": "countries",
@@ -6274,14 +5706,6 @@
         {
             "name": "parentUploads",
             "description": "parentUploads"
-        },
-        {
-            "name": "responsiblePersons",
-            "description": "responsiblePersons"
-        },
-        {
-            "name": "transferAssets",
-            "description": "transferAssets"
         },
         {
             "name": "unBlock",

@@ -38,7 +38,7 @@ class UserHierarchies extends Model
     *
     * @var string
     */
-    protected $keyType = 'string';
+    protected $keyType = 'integer';
 
     /**
     * The attributes that are mass assignable.
@@ -46,6 +46,7 @@ class UserHierarchies extends Model
     * @var array
     */
     protected $fillable = [
+        'uuid',
         'working_station_id',
         'user_id',
         'status',

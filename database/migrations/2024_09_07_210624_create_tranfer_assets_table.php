@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('tranfer_assets', function (Blueprint $table) {
             $table->bigIncrements('reason');
+            $table->uuid('uuid');
             $table->string('registration_No');           
             $table->string('depertment_Id');
             $table->string('tranfer_Type');

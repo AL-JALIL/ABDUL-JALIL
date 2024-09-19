@@ -8,23 +8,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
-class resposiblePerson extends Model
+class Assets extends Model
 {
     use LogsActivity, HasFactory, SoftDeletes;
-    
+
     /**
     * The table associated with the model.
     *
     * @var string
     */
-    protected $table = 'responsibele_Person';
+    protected $table = 'assets';
 
     /**
     * The primary key associated with the table.
     *
     * @var string
     */
-    protected $primaryKey = 'responsibele_Person';
+    protected $primaryKey = 'asset_id';
 
     /**
     * Indicates if the model's ID is not auto-incrementing.
@@ -46,8 +46,11 @@ class resposiblePerson extends Model
     * @var array
     */
     protected $fillable = [
-        'responsibele_Person',
-        'created_by'
+        'uuid',
+        'asset_name',
+        'serial_number',
+        'code',
+        'created_by',
     ];
 
     /**
@@ -64,4 +67,3 @@ class resposiblePerson extends Model
         // Chain fluent methods for configuration options
     }
 }
-

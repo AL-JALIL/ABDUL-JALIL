@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('conditions', function (Blueprint $table) {
             $table->bigIncrements('condition_id');
+            $table->uuid('uuid');
             $table->string('condition_name', 250);
             $table->unsignedBigInteger('created_by');
             $table->softDeletes();

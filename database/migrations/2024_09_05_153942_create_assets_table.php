@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->bigIncrements('asset_id');
+            $table->uuid('uuid');
             $table->string('asset_name', 250); 
-            $table->string('serial_number',20)->uniqid();
+            $table->string('serial_number',50)->uniqid();
             $table->string('code', 250); 
             $table->unsignedBigInteger('created_by');
             $table->softDeletes();

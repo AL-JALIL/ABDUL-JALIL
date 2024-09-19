@@ -11,17 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chalenges', function (Blueprint $table) {
-            $table->bigIncrements('chalenge_id');   
-            $table->unsignedBigInteger('user_id');       
-            $table->string('chalenges');
-            $table->string('chalenge_file');
+        Schema::create('challenges', function (Blueprint $table) {
+            $table->bigIncrements('chalenge_id');  
+            $table->uuid('uuid'); 
+            $table->unsignedBigInteger('user_id');  
+            $table->string('challenge_title');
+            $table->unsignedBigInteger('department_id');       
+            $table->string('description');
+            $table->string('challenge_file')->nullable();
             $table->string('status');
-            $table->unsignedBigInteger('created_by');
             $table->softDeletes();
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('department_id')->references('department_id')->on('departments');
 
         });
     }

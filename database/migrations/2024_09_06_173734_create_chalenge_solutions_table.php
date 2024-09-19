@@ -12,16 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('chalenge_solutions', function (Blueprint $table) {
-            $table->bigIncrements('user_id');
+            $table->bigIncrements('chalenge_solution_id');
+            $table->uuid('uuid');
             $table->string('solution');           
-            $table->string('solution_file');
+            $table->string('solution_file')->nullable();
             $table->string('status');
             $table->unsignedBigInteger('chalenge_id');
             $table->unsignedBigInteger('created_by');
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('chalenge_id')->references('chalenge_id')->on('chalenges');
+            $table->foreign('chalenge_id')->references('chalenge_id')->on('challenges');
         });
     }
 

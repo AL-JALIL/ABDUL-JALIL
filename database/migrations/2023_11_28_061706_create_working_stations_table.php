@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('working_stations', function (Blueprint $table) {
             $table->bigIncrements('working_station_id');
+            $table->uuid('uuid');
             $table->string('working_station_name', 250);           
             $table->string('admin_hierarchy_id',10);
             $table->string('location_id', 20);

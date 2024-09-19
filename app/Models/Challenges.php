@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
-class Condition extends Model
+class Challenges extends Model
 {
     use LogsActivity, HasFactory, SoftDeletes;
 
@@ -17,14 +17,14 @@ class Condition extends Model
     *
     * @var string
     */
-    protected $table = 'condition';
+    protected $table = 'chalenges';
 
     /**
     * The primary key associated with the table.
     *
     * @var string
     */
-    protected $primaryKey = 'condition_id';
+    protected $primaryKey = 'chalenge_id';
 
     /**
     * Indicates if the model's ID is not auto-incrementing.
@@ -38,7 +38,7 @@ class Condition extends Model
     *
     * @var string
     */
-    protected $keyType = 'string';
+    protected $keyType = 'integer';
 
     /**
     * The attributes that are mass assignable.
@@ -46,8 +46,16 @@ class Condition extends Model
     * @var array
     */
     protected $fillable = [
-        'condition_name',
+        'uuid',
+        'department_id',
+        'user_id',
+        'description',
+        'chalenge_file',
+        'status',
         'created_by',
+
+
+        
     ];
 
     /**

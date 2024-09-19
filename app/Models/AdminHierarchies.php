@@ -47,6 +47,7 @@ class AdminHierarchies extends Model
     */
     protected $fillable = [
         'admin_hierarchy_id',
+        'uuid',
         'admin_hierarchy_name',
         'created_by',
         'parent_id'

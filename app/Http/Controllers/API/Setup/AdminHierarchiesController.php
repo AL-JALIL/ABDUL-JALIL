@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\AdminHierarchiesImport;
 use App\Models\AdminHierarchies;
+use Illuminate\Support\Str;
 use Exception;
 use Validator;
 use DB;
@@ -215,6 +216,7 @@ class AdminHierarchiesController extends Controller
             try{
                 $AdminHierarchies = AdminHierarchies::create([
                     'admin_hierarchy_id' => $request->admin_hierarchy_id,
+                    'uuid' => Str::uuid(),
                     'admin_hierarchy_name' => $request->admin_hierarchy_name,
                     'parent_id' =>  $request->parent_id,
                     'created_by' => $user_id

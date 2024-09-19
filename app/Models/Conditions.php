@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
-class Department extends Model
+class Conditions extends Model
 {
     use LogsActivity, HasFactory, SoftDeletes;
 
@@ -17,14 +17,14 @@ class Department extends Model
     *
     * @var string
     */
-    protected $table = 'departments';
+    protected $table = 'condition';
 
     /**
     * The primary key associated with the table.
     *
     * @var string
     */
-    protected $primaryKey = 'department_id';
+    protected $primaryKey = 'condition_id';
 
     /**
     * Indicates if the model's ID is not auto-incrementing.
@@ -46,10 +46,9 @@ class Department extends Model
     * @var array
     */
     protected $fillable = [
-        'department_id',
-        'department_name',
-        'parent_id',
-        'created_by'
+        'uuid',
+        'condition_name',
+        'created_by',
     ];
 
     /**

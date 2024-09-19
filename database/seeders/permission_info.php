@@ -58,26 +58,6 @@ class permission_info extends Seeder
                 'Delete Condition',
                 'View Condition',
 
-                'Create Chalenge',
-                'Update Chalenge',
-                'Delete Chalenge',
-                'View Chalenge',
-
-                'Create Chalenge Solution',
-                'Update Chalenge Solution',
-                'Delete Chalenge Solution',
-                'View Chalenge Solution',
-
-                'Create Asset Department',
-                'Update Asset Department',
-                'Delete Asset Department',
-                'View Asset Department',
-
-                'Create Transfer Asset',
-                'Update Transfer Asset',
-                'Delete Transfer Asset',
-                'View Transfer Asset',
-
                 'Create Responsible Person',
                 'Update Responsible Person',
                 'Delete Responsible Person',
@@ -107,6 +87,28 @@ class permission_info extends Seeder
                 'Update Parent Upload Type',
                 'Delete Parent Upload Type',
                 'View Parent Upload Type',
+
+            'Challenge Module',
+                'Create Challenge',
+                'Update Challenge',
+                'Delete Challenge',
+                'View Challenge',
+
+                'Create Challenge Solution',
+                'Update Challenge Solution',
+                'Delete Challenge Solution',
+                'View Challenge Solution',
+
+            'Asset Module',
+                'Create Asset Department',
+                'Update Asset Department',
+                'Delete Asset Department',
+                'View Asset Department',
+
+                'Create Transfer Asset',
+                'Update Transfer Asset',
+                'Delete Transfer Asset',
+                'View Transfer Asset',
                 
                 'Zone B Permission',
                 'Division permission',

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_hierarchies', function (Blueprint $table) {
             $table->bigIncrements('user_hierarche_id');
+            $table->uuid('uuid');
             $table->unsignedBigInteger('working_station_id');           
             $table->unsignedBigInteger('user_id');
             $table->integer('status');

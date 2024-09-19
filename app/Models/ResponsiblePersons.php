@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
-class ResponsiblePerson extends Model
+class ResponsiblePersons extends Model
 {
     use LogsActivity, HasFactory, SoftDeletes;
     
@@ -38,7 +38,7 @@ class ResponsiblePerson extends Model
      *
      * @var string
      */
-    protected $keyType = 'string';
+    protected $keyType = 'integer';
 
     /**
      * The attributes that are mass assignable.
@@ -46,9 +46,10 @@ class ResponsiblePerson extends Model
      * @var array
      */
     protected $fillable = [
+        'uuid',
         'payroll',
         'registration_number',
-        'date',
+        'start_date',
         'status',
         'created_by'
     ];

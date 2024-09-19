@@ -46,6 +46,7 @@ class Identifications extends Model
     * @var array
     */
     protected $fillable = [
+        'uuid',
         'identification_name',
         'created_by',
     ];

@@ -7,6 +7,7 @@ use App\Http\Controllers\API\Setup\GeneralController;
 use Illuminate\Http\Request;
 use App\Models\ParentUploads;
 use App\Models\ParentUploadTypes;
+use Illuminate\Support\Str;
 use Exception;
 use Validator;
 use DB;
@@ -16,10 +17,13 @@ class ParentUploadsController extends Controller
     public function __construct()
     {
         $this->middleware('auth:sanctum');
-        $this->middleware('permission:Setup Management|Create Parent Upload Type|Create Parent Upload Type|Update Parent Upload Type|Update Parent Upload Type|Delete Parent Upload Type', ['only' => ['index','create','store','update','destroy']]);
+        $this->middleware('permission:View Parent Upload Type|Create Parent Upload Type|Create Parent Upload Type|Update Parent Upload Type|Update Parent Upload Type|Delete Parent Upload Type', ['only' => ['index','create','store','update','destroy']]);
+
+        // $validate_batch_year = new GeneralController();
+        // $validate_batch_year->batch_year_configuration();
     }
 
-/**
+    /**
      * @OA\Get(
      *     path="/api/parentUploads",
      *     summary="Get a list of parentUploads",
@@ -46,14 +50,15 @@ class ParentUploadsController extends Controller
     *                     type="object",
     *                     @OA\Property(property="parent_upload_id", type="integer", example=2),
     *                     @OA\Property(property="uuid", type="string", example="efdbd310-5cb7-4e94-b2dd-010185ddac95"),
-    *                     @OA\Property(property="parent_upload_name", type="string", example="ROLE NATIONAL"),
-    *                     @OA\Property(property="created_by", type="integer", example=1),
-    *                     @OA\Property(property="first_name", type="string", example="Mohammed"),
-    *                     @OA\Property(property="middle_name", type="string", example="Abdalla"),
-    *                     @OA\Property(property="last_name", type="string", example="Bakar"),
-    *                     @OA\Property(property="created_at", type="string", format="date-time", example="2024-08-28 11:30:25"),
-    *                     @OA\Property(property="deleted_at", type="string", format="date-time", example="2024-08-28 11:30:25"),
-    *                     @OA\Property(property="updated_at", type="string", format="date-time", example="2024-08-28 11:30:25")
+    *                     @OA\Property(property="parent_upload_name", type="string"),
+    *                     @OA\Property(property="isSelected", type="boolean"),
+    *                     @OA\Property(property="created_by", type="integer"),
+    *                     @OA\Property(property="first_name", type="string"),
+    *                     @OA\Property(property="middle_name", type="string"),
+    *                     @OA\Property(property="last_name", type="string"),
+    *                     @OA\Property(property="created_at", type="string", format="date-time"),
+    *                     @OA\Property(property="deleted_at", type="string", format="date-time"),
+    *                     @OA\Property(property="updated_at", type="string", format="date-time")
     *                 )
     *             ),
     *             @OA\Property(property="statusCode", type="integer", example=200)
@@ -63,7 +68,7 @@ class ParentUploadsController extends Controller
     */
     public function index()
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Setup Management'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('View Parent Upload Type'))
         {
 
             $parent_uploads = DB::table('parent_uploads')
@@ -92,7 +97,7 @@ class ParentUploadsController extends Controller
         //
     }
 
-    /**
+   /**
      * @OA\Post(
      *     path="/api/parentUploads",
      *     summary="Store a new parentUploads",
@@ -102,6 +107,7 @@ class ParentUploadsController extends Controller
      *         @OA\JsonContent(
      *             type="object",
      *             @OA\Property(property="parent_upload_name", type="string"),
+     *             @OA\Property(property="education_level_id", type="string"),
      *             @OA\Property(property="upload_type_id", type="array", @OA\Items(type="integer"))
      *         )
      *     ),
@@ -128,7 +134,7 @@ class ParentUploadsController extends Controller
     */
     public function store(Request $request)
     {
-        $auto_id = random_int(10000, 99999).time();
+        $auto_id = random_int(100000, 999999).time();
 
         $check_value = DB::select("SELECT parent_upload_name FROM parent_uploads t WHERE LOWER(parent_upload_name) = LOWER('$request->parent_upload_name')");
 
@@ -142,16 +148,20 @@ class ParentUploadsController extends Controller
                 $user_id = auth()->user()->id;
 
                 try{
-
                     $ParentUploads = ParentUploads::create([
+                        'parent_upload_id' => $auto_id,
+                        'uuid' => Str::uuid(),
                         'parent_upload_name' => $request->parent_upload_name,
                         'created_by' => $user_id
                     ]);
 
-                    foreach ($request->parent_upload_types as $parent_upload_type) {
+                    foreach ($request->upload_type_id as $upload_type_id) {
                         $ParentUploadTypes = ParentUploadTypes::create([
+                            'parent_upload_type_id' => $auto_id,
+                            'uuid' => Str::uuid(),
                             'parent_upload_id' => $ParentUploads->parent_upload_id,
-                            'upload_type_id' => $parent_upload_type['upload_type_id'],
+                            'upload_type_id' => $upload_type_id,
+                            'education_level_id' => $request->education_level_id,
                             'created_by' => $user_id
                         ]);
                     }
@@ -166,7 +176,7 @@ class ParentUploadsController extends Controller
                 catch (Exception $e)
                 {
                     return response()
-                        ->json(['message' => $e->getMessage(),'statusCode'=> 401]);
+                        ->json(['message' => 'Internal server error','statusCode'=> 500,'error'=> $e->getMessage()]);
                 }
 
             }else
@@ -218,14 +228,15 @@ class ParentUploadsController extends Controller
     *                     type="object",
     *                     @OA\Property(property="parent_upload_id", type="integer", example=2),
     *                     @OA\Property(property="uuid", type="string", example="efdbd310-5cb7-4e94-b2dd-010185ddac95"),
-    *                     @OA\Property(property="parent_upload_name", type="string", example="ROLE NATIONAL"),
-    *                     @OA\Property(property="created_by", type="integer", example=1),
-    *                     @OA\Property(property="first_name", type="string", example="Mohammed"),
-    *                     @OA\Property(property="middle_name", type="string", example="Abdalla"),
-    *                     @OA\Property(property="last_name", type="string", example="Bakar"),
-    *                     @OA\Property(property="created_at", type="string", format="date-time", example="2024-08-28 11:30:25"),
-    *                     @OA\Property(property="deleted_at", type="string", format="date-time", example="2024-08-28 11:30:25"),
-    *                     @OA\Property(property="updated_at", type="string", format="date-time", example="2024-08-28 11:30:25")
+    *                     @OA\Property(property="parent_upload_name", type="string"),
+    *                     @OA\Property(property="isSelected", type="boolean"),
+    *                     @OA\Property(property="created_by", type="integer"),
+    *                     @OA\Property(property="first_name", type="string"),
+    *                     @OA\Property(property="middle_name", type="string"),
+    *                     @OA\Property(property="last_name", type="string"),
+    *                     @OA\Property(property="created_at", type="string", format="date-time"),
+    *                     @OA\Property(property="deleted_at", type="string", format="date-time"),
+    *                     @OA\Property(property="updated_at", type="string", format="date-time")
     *                 )
     *             ),
     *             @OA\Property(property="statusCode", type="integer", example=200)
@@ -233,9 +244,9 @@ class ParentUploadsController extends Controller
     *     )
     * )
     */
-    public function show(string $parent_upload_id)
+    public function show($parent_upload_id)
     {
-        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->can('Setup Management'))
+        if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('View Parent Upload Type'))
         {
             $parent_uploads = DB::table('parent_uploads')
                                 ->select('parent_uploads.*')
@@ -245,36 +256,43 @@ class ParentUploadsController extends Controller
             if (sizeof($parent_uploads) > 0)
             {
 
-                $parent_upload_type = DB::table('parent_upload_types')
-                                            ->join('upload_types','upload_types.upload_type_id','=','parent_upload_types.upload_type_id')
-                                            ->select('upload_types.upload_type_id','upload_types.upload_name')
-                                            ->where('parent_upload_types.parent_upload_id',$parent_upload_id)
-                                            ->whereNull('parent_upload_types.deleted_at')
-                                            ->get();
+                $parent_upload_types = DB::table('parent_upload_types')
+                                        ->join('upload_types', 'upload_types.upload_type_id', '=', 'parent_upload_types.upload_type_id')
+                                        ->join('parent_uploads', 'parent_uploads.parent_upload_id', '=', 'parent_upload_types.parent_upload_id')
+                                        ->select('parent_uploads.parent_upload_id', 'parent_uploads.uuid', 'parent_uploads.parent_upload_name', 'parent_uploads.created_by', 'parent_uploads.created_at', 'parent_uploads.updated_at', 'upload_types.upload_type_id', 'upload_types.upload_name')
+                                        ->where('parent_upload_types.parent_upload_id', $parent_upload_id)
+                                        ->whereNull('parent_upload_types.deleted_at')
+                                        ->get();
 
+                $parentUploads = [];
 
-                $parent_upload_types = [];
-                foreach($parent_upload_type as $item){
-                    array_push($parent_upload_types, array(
-                        'upload_type_id' => $item->upload_type_id,
-                        'upload_name' => $item->upload_name,
+                foreach ($parent_upload_types as $type) {
+                    $parentUploads[$type->parent_upload_id]['parent_upload_id'] = $type->parent_upload_id;
+                    $parentUploads[$type->parent_upload_id]['uuid'] = $type->uuid;
+                    $parentUploads[$type->parent_upload_id]['parent_upload_name'] = $type->parent_upload_name;
+                    $parentUploads[$type->parent_upload_id]['created_by'] = $type->created_by;
+                    $parentUploads[$type->parent_upload_id]['deleted_at'] = null;
+                    $parentUploads[$type->parent_upload_id]['created_at'] = $type->created_at;
+                    $parentUploads[$type->parent_upload_id]['updated_at'] = $type->updated_at;
+                    
+                    $parentUploads[$type->parent_upload_id]['upload_type'][] = [
+                        'upload_type_id' => $type->upload_type_id,
+                        'upload_name' => $type->upload_name,
                         'isSelected' => true
-                    ));
+                    ];
                 }
 
-                $respose =[
-                    'data' => $parent_uploads,
-                    'parent_upload_types' => $parent_upload_types,
-                    'statusCode'=> 200
+                $responseData = [
+                    'data' => array_values($parentUploads),
+                    'statusCode' => 200
                 ];
 
-                return response()->json($respose);
+                return response()->json($responseData);
 
             }else{
                 return response()
                 ->json(['message' => 'No Parent Upload Type Found','statusCode'=> 400]);
             }
-
         }
         else{
             return response()
@@ -330,10 +348,10 @@ class ParentUploadsController extends Controller
     *     )
     * )
     */
-    public function update(Request $request, string $parent_upload_id)
+    public function update(Request $request,$parent_upload_id)
     {
 
-        $check_value = DB::select("SELECT parent_upload_name FROM parent_uploads t WHERE LOWER(parent_upload_name) = LOWER('$request->parent_upload_name') and parent_upload_id != $parent_upload_id");
+        $check_value = DB::select("SELECT parent_upload_name FROM parent_uploads WHERE LOWER(parent_upload_name) = LOWER('$request->parent_upload_name') and parent_upload_id != '$parent_upload_id'");
 
         if(sizeof($check_value) != 0)
         {
@@ -345,10 +363,10 @@ class ParentUploadsController extends Controller
             return response()->json($respose);       
         }
 
-
         if(auth()->user()->hasRole('ROLE ADMIN') || auth()->user()->hasRole('ROLE NATIONAL') || auth()->user()->can('Update Parent Upload Type'))
         {
             $user_id = auth()->user()->id;
+            
             try{
                 $ParentUploads = ParentUploads::find($parent_upload_id);
                 $ParentUploads->parent_upload_name  = $request->parent_upload_name;
@@ -359,17 +377,18 @@ class ParentUploadsController extends Controller
 
                 $existingParentUploadTypes = $ParentUploadTypes->pluck('upload_type_id')->toArray();
 
-                $newParentUploadTypes = $request->parent_upload_types;
-
-                for($x = 0; $x < count($newParentUploadTypes); $x++) {
+                $newParentUploadTypes = $request->upload_type_id;
+                
+                for($x = 0; $x < count($request->upload_type_id); $x++) {
                     
-                    if (in_array($newParentUploadTypes[$x]['upload_type_id'], $existingParentUploadTypes)) {
-                        ParentUploadTypes::withTrashed()->where('parent_upload_id', $parent_upload_id)->where('upload_type_id', $newParentUploadTypes[$x]['upload_type_id'])->update(['deleted_at' => null]);
+                    if (in_array($newParentUploadTypes[$x], $existingParentUploadTypes)) {
+                        ParentUploadTypes::withTrashed()->where('parent_upload_id', $parent_upload_id)->where('upload_type_id', $newParentUploadTypes[$x])->update(['deleted_at' => null]);
                     } else {
 
                         $ParentUploadTypes = ParentUploadTypes::create([
                             'parent_upload_id' => $parent_upload_id,
-                            'upload_type_id' => $newParentUploadTypes[$x]['upload_type_id'],
+                            'upload_type_id' => $newParentUploadTypes->upload_type_id,
+                            'education_level_id' => $request->education_level_id,
                             'created_by' => $user_id
                         ]);
                     }
@@ -378,8 +397,8 @@ class ParentUploadsController extends Controller
 
                 $newExistingParentUploadTypes = [];
 
-                foreach($newParentUploadTypes as $new_item){
-                    $newExistingParentUploadTypes[] = $new_item['upload_type_id'];
+                foreach($newParentUploadTypes as $upload_type_id){
+                    $newExistingParentUploadTypes[] = $upload_type_id;
                 }
 
                 for($x = 0; $x < count($existingParentUploadTypes); $x++) {
@@ -389,10 +408,8 @@ class ParentUploadsController extends Controller
                     } else {
                         ParentUploadTypes::where('parent_upload_id', $parent_upload_id)->where('upload_type_id', $existingParentUploadTypes[$x])->update(['deleted_at' => now()]);
                     }
-                    
                 }
             
-
                 $respose =[
                     'message' =>'Parent Upload Type Updated Successfully',
                     'statusCode'=> 201
@@ -402,7 +419,7 @@ class ParentUploadsController extends Controller
             catch (Exception $e)
             {
                 return response()
-                    ->json(['message' => $e->getMessage(),'statusCode'=> 401]);
+                    ->json(['message' => 'Internal server error','statusCode'=> 500,'error'=> $e->getMessage()]);
             }
         }
         else{
@@ -452,7 +469,7 @@ class ParentUploadsController extends Controller
                 $delete->delete();
 
                 $respose =[
-                    'message'=> 'Parent Upload Type Blocked Successfuly',
+                    'message'=> 'Parent Upload Type Blocked Successfully',
                     'statusCode'=> 201
                 ];
                 return response()->json($respose);

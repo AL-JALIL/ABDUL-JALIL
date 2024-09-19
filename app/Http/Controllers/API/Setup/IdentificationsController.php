@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\IdentificationsImport;
 use App\Models\Identifications;
+use Illuminate\Support\Str;
 use Exception;
 use Validator;
 use DB;
@@ -171,6 +172,7 @@ class IdentificationsController extends Controller
 
             try{
                 $Identifications = Identifications::create([ 
+                    'uuid' => Str::uuid(),
                     'identification_name' => $request->identification_name,
                     'created_by' => $user_id
                 ]);
