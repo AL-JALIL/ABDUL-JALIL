@@ -15,7 +15,7 @@
         "/api/assetDepartment": {
             "get": {
                 "tags": [
-                    "assetDepartments"
+                    "assertDepartments"
                 ],
                 "summary": "Get a list of asset departments",
                 "operationId": "1ce5549baea42b2ab4022ea4d3177f53",
@@ -130,7 +130,7 @@
         "/api/storeAssertDepartment": {
             "post": {
                 "tags": [
-                    "assetDepartments"
+                    "assertDepartments"
                 ],
                 "summary": "Store a new assert department",
                 "operationId": "5dce778f682e23d4a6712123cc32fc51",
@@ -215,7 +215,7 @@
         "/api/viewAssertDepartment/{asset_department_id}": {
             "get": {
                 "tags": [
-                    "assetDepartments"
+                    "assertDepartments"
                 ],
                 "summary": "Get a specific asset department",
                 "operationId": "67881a6eaf8157e420b446242a9ea962",
@@ -365,7 +365,7 @@
         "/api/updateAssertDepartment/{asset_department_id}": {
             "put": {
                 "tags": [
-                    "assetDepartments"
+                    "assertDepartments"
                 ],
                 "summary": "Update a asset departments",
                 "operationId": "abbb46e8a9c663b305db1f00a5be4bb0",
@@ -452,7 +452,7 @@
         "/api/destroyAssertDepartment/{asset_department_id}": {
             "delete": {
                 "tags": [
-                    "assetDepartments"
+                    "assertDepartments"
                 ],
                 "summary": "Delete a destroy assert department",
                 "operationId": "083f68847a3c057add671cec4e9296c7",
@@ -507,7 +507,7 @@
         "/api/transferAssert": {
             "post": {
                 "tags": [
-                    "assetDepartments"
+                    "assertDepartments"
                 ],
                 "summary": "Update transfer assert",
                 "operationId": "c464e8462f9f1e688a4ee5db3c86389d",
@@ -1370,388 +1370,6 @@
                         "required": true,
                         "schema": {
                             "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "headers": {
-                            "Cache-Control": {
-                                "description": "Cache control header",
-                                "schema": {
-                                    "type": "string",
-                                    "example": "no-cache, private"
-                                }
-                            },
-                            "Content-Type": {
-                                "description": "Content type header",
-                                "schema": {
-                                    "type": "string",
-                                    "example": "application/json; charset=UTF-8"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/assets": {
-            "get": {
-                "tags": [
-                    "asset"
-                ],
-                "summary": "Get a list of assets",
-                "operationId": "62a8049651a178012b0a8d9a7c66fc7e",
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "headers": {
-                            "Cache-Control": {
-                                "description": "Cache control header",
-                                "schema": {
-                                    "type": "string",
-                                    "example": "no-cache, private"
-                                }
-                            },
-                            "Content-Type": {
-                                "description": "Content type header",
-                                "schema": {
-                                    "type": "string",
-                                    "example": "application/json; charset=UTF-8"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "asset_id": {
-                                                        "type": "integer"
-                                                    },
-                                                    "asset_name": {
-                                                        "type": "string"
-                                                    },
-                                                    "uuid": {
-                                                        "type": "string"
-                                                    },
-                                                    "serial_number": {
-                                                        "type": "string"
-                                                    },
-                                                    "code": {
-                                                        "type": "string"
-                                                    },
-                                                    "created_by": {
-                                                        "type": "integer"
-                                                    },
-                                                    "first_name": {
-                                                        "type": "string"
-                                                    },
-                                                    "middle_name": {
-                                                        "type": "string"
-                                                    },
-                                                    "last_name": {
-                                                        "type": "string"
-                                                    },
-                                                    "created_at": {
-                                                        "type": "string",
-                                                        "format": "date-time"
-                                                    },
-                                                    "deleted_at": {
-                                                        "type": "string",
-                                                        "format": "date-time"
-                                                    },
-                                                    "updated_at": {
-                                                        "type": "string",
-                                                        "format": "date-time"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "post": {
-                "tags": [
-                    "asset"
-                ],
-                "summary": "Store a new assets",
-                "operationId": "e563897b93239b1f28030ce31eda95d5",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "asset_name": {
-                                        "type": "string"
-                                    },
-                                    "serial_number": {
-                                        "type": "string"
-                                    },
-                                    "code": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "headers": {
-                            "Cache-Control": {
-                                "description": "Cache control header",
-                                "schema": {
-                                    "type": "string",
-                                    "example": "no-cache, private"
-                                }
-                            },
-                            "Content-Type": {
-                                "description": "Content type header",
-                                "schema": {
-                                    "type": "string",
-                                    "example": "application/json; charset=UTF-8"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/api/assets/{asset_id}": {
-            "get": {
-                "tags": [
-                    "asset"
-                ],
-                "summary": "Get a specific department",
-                "operationId": "ffbde56919f8e3893038fbd6ff7cfdfa",
-                "parameters": [
-                    {
-                        "name": "asset_id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "headers": {
-                            "Cache-Control": {
-                                "description": "Cache control header",
-                                "schema": {
-                                    "type": "string",
-                                    "example": "no-cache, private"
-                                }
-                            },
-                            "Content-Type": {
-                                "description": "Content type header",
-                                "schema": {
-                                    "type": "string",
-                                    "example": "application/json; charset=UTF-8"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "properties": {
-                                                    "asset_name": {
-                                                        "type": "string"
-                                                    },
-                                                    "uuid": {
-                                                        "type": "string"
-                                                    },
-                                                    "serial_number": {
-                                                        "type": "string"
-                                                    },
-                                                    "code": {
-                                                        "type": "string"
-                                                    },
-                                                    "created_by": {
-                                                        "type": "integer"
-                                                    },
-                                                    "first_name": {
-                                                        "type": "string"
-                                                    },
-                                                    "middle_name": {
-                                                        "type": "string"
-                                                    },
-                                                    "last_name": {
-                                                        "type": "string"
-                                                    },
-                                                    "created_at": {
-                                                        "type": "string",
-                                                        "format": "date-time"
-                                                    },
-                                                    "deleted_at": {
-                                                        "type": "string",
-                                                        "format": "date-time"
-                                                    },
-                                                    "updated_at": {
-                                                        "type": "string",
-                                                        "format": "date-time"
-                                                    }
-                                                },
-                                                "type": "object"
-                                            }
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "asset_id"
-                ],
-                "summary": "Update an existing assets",
-                "operationId": "e866d5b6979112cb2c1117e4e9b65eee",
-                "parameters": [
-                    {
-                        "name": "asset_id",
-                        "in": "path",
-                        "description": "Department ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "asset_name": {
-                                        "type": "string",
-                                        "example": "Updated Laptop"
-                                    },
-                                    "serial_number": {
-                                        "type": "string",
-                                        "example": "SN654321"
-                                    },
-                                    "code": {
-                                        "type": "string",
-                                        "example": "LAP-002"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Successful operation",
-                        "headers": {
-                            "Cache-Control": {
-                                "description": "Cache control header",
-                                "schema": {
-                                    "type": "string",
-                                    "example": "no-cache, private"
-                                }
-                            },
-                            "Content-Type": {
-                                "description": "Content type header",
-                                "schema": {
-                                    "type": "string",
-                                    "example": "application/json; charset=UTF-8"
-                                }
-                            }
-                        },
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "assets"
-                ],
-                "summary": "Delete an asset",
-                "operationId": "81e92ad7f77593a8527ff2be1f186bbf",
-                "parameters": [
-                    {
-                        "name": "asset_id",
-                        "in": "path",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
                         }
                     }
                 ],
@@ -5660,8 +5278,8 @@
     },
     "tags": [
         {
-            "name": "assetDepartments",
-            "description": "assetDepartments"
+            "name": "assertDepartments",
+            "description": "assertDepartments"
         },
         {
             "name": "challenges",
@@ -5670,18 +5288,6 @@
         {
             "name": "adminHierarchies",
             "description": "adminHierarchies"
-        },
-        {
-            "name": "asset",
-            "description": "asset"
-        },
-        {
-            "name": "asset_id",
-            "description": "asset_id"
-        },
-        {
-            "name": "assets",
-            "description": "assets"
         },
         {
             "name": "condition",
