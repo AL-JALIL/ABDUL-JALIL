@@ -25,7 +25,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('resetPassword', [App\Http\Controllers\API\User\UserProfileCotroller::class, 'reset_password'])->name('resetPassword');
     Route::get('logsFunction', [App\Http\Controllers\API\User\UserProfileCotroller::class, 'logs_function'])->name('logsFunction');
 
-    Route::resource('assert', App\Http\Controllers\API\Setup\AssertController::class);
+    Route::resource('asset', App\Http\Controllers\API\Setup\AssetController::class);
     Route::resource('adminHierarchies', App\Http\Controllers\API\Setup\AdminHierarchiesController::class);
     Route::resource('workStations', App\Http\Controllers\API\Setup\WorkingStationsController::class);
     Route::resource('uploadTypes', App\Http\Controllers\API\Setup\UploadTypesController::class);

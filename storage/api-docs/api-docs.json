@@ -1791,16 +1791,32 @@
                 }
             }
         },
-        "/api/Departments": {
+        "/api/departments": {
             "get": {
                 "tags": [
-                    "Departments"
+                    "department"
                 ],
                 "summary": "Get a list of departments",
-                "operationId": "99f2b6208a677858d9e3e978db0e263f",
+                "operationId": "e627cf8030cbd4b560772c457513a5eb",
                 "responses": {
                     "200": {
                         "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1809,28 +1825,38 @@
                                             "type": "array",
                                             "items": {
                                                 "properties": {
-                                                    "Department_id": {
-                                                        "type": "integer",
-                                                        "example": 2
-                                                    },
                                                     "department_name": {
-                                                        "type": "string",
-                                                        "example": "Out Patient OPD"
+                                                        "type": "string"
+                                                    },
+                                                    "uuid": {
+                                                        "type": "string"
+                                                    },
+                                                    "parent_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "created_by": {
+                                                        "type": "integer"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string"
                                                     },
                                                     "created_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
                                                     },
                                                     "deleted_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
                                                     },
                                                     "updated_at": {
                                                         "type": "string",
-                                                        "format": "date-time",
-                                                        "example": "2024-08-28 11:30:25"
+                                                        "format": "date-time"
                                                     }
                                                 },
                                                 "type": "object"
@@ -1845,40 +1871,15 @@
                                 }
                             }
                         }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
                     }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
+                }
             },
             "post": {
                 "tags": [
-                    "Departments"
+                    "department"
                 ],
-                "summary": "Create a new department",
-                "operationId": "810be378584bea8d4c536fc67ab1a51f",
+                "summary": "Store a new department",
+                "operationId": "36d98cb506b4286c63f1e85d2dae183c",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -1886,12 +1887,10 @@
                             "schema": {
                                 "properties": {
                                     "department_name": {
-                                        "type": "string",
-                                        "example": "Emergency Department"
+                                        "type": "string"
                                     },
                                     "parent_id": {
-                                        "type": "integer",
-                                        "example": 1
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -1900,59 +1899,33 @@
                     }
                 },
                 "responses": {
-                    "201": {
-                        "description": "Department created successfully",
-                        "content": {
-                            "application/json": {
+                    "200": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Department Inserted Successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 201
-                                        }
-                                    },
-                                    "type": "object"
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
                                 }
                             }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "type": "string",
-                                            "example": "Department Name Already Exists"
+                                            "type": "string"
                                         },
                                         "statusCode": {
-                                            "type": "integer",
-                                            "example": 400
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
+                                            "type": "integer"
                                         }
                                     },
                                     "type": "object"
@@ -1960,41 +1933,89 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
+                }
             }
         },
-        "/api/Departments/{department_id}": {
+        "/api/departments/{department_id}": {
             "get": {
                 "tags": [
-                    "Departments"
+                    "department"
                 ],
-                "summary": "Get a specific department by ID",
-                "operationId": "c11c8f96ac3e332a05d80ce914923494",
+                "summary": "Get a specific department",
+                "operationId": "782c63155dc3a65afa25d5d8e00678c0",
                 "parameters": [
                     {
                         "name": "department_id",
                         "in": "path",
-                        "description": "Department ID",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            }
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "data": {
-                                            "type": "object"
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "department_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "uuid": {
+                                                        "type": "string"
+                                                    },
+                                                    "parent_id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "created_by": {
+                                                        "type": "integer"
+                                                    },
+                                                    "first_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "middle_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "last_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "created_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "deleted_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    },
+                                                    "updated_at": {
+                                                        "type": "string",
+                                                        "format": "date-time"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
                                         },
                                         "statusCode": {
                                             "type": "integer",
@@ -2005,62 +2026,15 @@
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "description": "No Department Found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "No Department Found"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 400
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
                     }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
-            }
-        },
-        "/api/Department/{department_id}": {
+                }
+            },
             "put": {
                 "tags": [
-                    "Departments"
+                    "department"
                 ],
                 "summary": "Update an existing department",
-                "operationId": "178a3cefe4196b962cba2307079f54b4",
+                "operationId": "5ed5b570fc95537aaa06e712f5ed415c",
                 "parameters": [
                     {
                         "name": "department_id",
@@ -2079,12 +2053,10 @@
                             "schema": {
                                 "properties": {
                                     "department_name": {
-                                        "type": "string",
-                                        "example": "Emergency Department"
+                                        "type": "string"
                                     },
                                     "parent_id": {
-                                        "type": "integer",
-                                        "example": 1
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -2094,58 +2066,32 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Department updated successfully",
-                        "content": {
-                            "application/json": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Department Updated Successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
                                 }
                             }
-                        }
-                    },
-                    "400": {
-                        "description": "Bad Request",
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "type": "string",
-                                            "example": "Department Name Already Exists"
+                                            "type": "string"
                                         },
                                         "statusCode": {
-                                            "type": "integer",
-                                            "example": 400
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
+                                            "type": "integer"
                                         }
                                     },
                                     "type": "object"
@@ -2153,64 +2099,52 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
+                }
             },
             "delete": {
                 "tags": [
-                    "Departments"
+                    "department"
                 ],
                 "summary": "Delete a department",
-                "operationId": "f6266823c73224fed45fbbf84aa0c1c8",
+                "operationId": "d506c409bfef9d4a8642fcbffe914646",
                 "parameters": [
                     {
                         "name": "department_id",
                         "in": "path",
-                        "description": "Department ID",
                         "required": true,
                         "schema": {
-                            "type": "integer"
+                            "type": "string"
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Department blocked successfully",
-                        "content": {
-                            "application/json": {
+                        "description": "Successful operation",
+                        "headers": {
+                            "Cache-Control": {
+                                "description": "Cache control header",
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Department Blocked Successfully"
-                                        },
-                                        "statusCode": {
-                                            "type": "integer",
-                                            "example": 200
-                                        }
-                                    },
-                                    "type": "object"
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "Content-Type": {
+                                "description": "Content type header",
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
                                 }
                             }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
+                        },
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
+                                            "type": "string"
                                         },
                                         "statusCode": {
-                                            "type": "integer",
-                                            "example": 401
+                                            "type": "integer"
                                         }
                                     },
                                     "type": "object"
@@ -2218,12 +2152,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "sanctum": []
-                    }
-                ]
+                }
             }
         },
         "/api/locations": {
@@ -5298,8 +5227,8 @@
             "description": "countries"
         },
         {
-            "name": "Departments",
-            "description": "Departments"
+            "name": "department",
+            "description": "department"
         },
         {
             "name": "locations",
